@@ -36,7 +36,7 @@ Moving the cows:
     - A mill which is broken to form a new mill can not be formed again on the next move
     
 Flying the cows:
-    - When a player has only three cows remaining, desperate measures are called for. This player's cows are allowed to "fly" to any empty intersection, not just adjacent ones
+	- When a player has only three cows remaining, desperate measures are called for. This player's cows are allowed to "fly" to any empty intersection, not just adjacent ones
     
     - If one player has three cows and the other player has more than three cows, only the player with three cows is allowed to fly
     
