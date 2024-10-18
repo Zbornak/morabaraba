@@ -9,7 +9,7 @@ by Zbornak, powered by Impi ai
     
 A traditional 2-player strategy game from South Africa
 
-# RULES
+## RULES
 
 ## Placing the cows:
 
