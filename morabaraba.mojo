@@ -113,5 +113,3 @@ def main():
                         print("error drawing board")              
     elif user_cow_choice == "light":
         print("impi is considering its move...")
-        
-        
