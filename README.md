@@ -11,7 +11,8 @@ A traditional 2-player strategy game from South Africa
 
 # RULES
 
-Placing the cows:
+## Placing the cows:
+
     - The board is empty when the game begins. Each player has 12 pieces, known as "cows"; one player has light cows and the other has dark cows
     
     - The player with the dark cows moves first
@@ -24,7 +25,8 @@ Placing the cows:
     
     - Even if a move creates more than one mill, only one cow can be shot in a single move
     
-Moving the cows:
+## Moving the cows:
+
     - After all the cows have been placed, each turn consists of moving a cow to an empty adjacent intersection
     
     - As before, completing a mill allows a player to shoot one of the opponent's cows. Again, this must be a cow which is not in a mill, unless all of the opponent's cows are in mills
@@ -35,12 +37,14 @@ Moving the cows:
     
     - A mill which is broken to form a new mill can not be formed again on the next move
     
-Flying the cows:
+## Flying the cows:
+
 	- When a player has only three cows remaining, desperate measures are called for. This player's cows are allowed to "fly" to any empty intersection, not just adjacent ones
     
     - If one player has three cows and the other player has more than three cows, only the player with three cows is allowed to fly
     
-Finishing the game:
+## Finishing the game:
+
     - A win occurs if one opponent has just two cows or if there are no moves
     
     - If either player has only three cows and neither player shoots a cow within ten moves, the game is drawn
