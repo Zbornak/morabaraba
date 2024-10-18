@@ -49,4 +49,4 @@ Finishing the game:
     
     - If one player picks up all cows while the play is still on, the player whose cows are on the board wins by default
     
-    - If a player plays twice before the other player, the player who did not play wins by default""")
+    - If a player plays twice before the other player, the player who did not play wins by default
