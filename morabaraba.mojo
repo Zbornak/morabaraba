@@ -64,7 +64,7 @@ def main():
     print("***PLACING PHASE***")
                      
     while user_cows_remaining > 0 and impi_cows_remaining > 0:
-        # player makes their move       
+        # START OF PLAYER MOVE       
         user_move_choice = py_input("make your move: ")
         choice = str(user_move_choice)
         # check to see if choice is valid and if you or impi aren't already on that spot
@@ -84,8 +84,9 @@ def main():
                    
         print(String("you chose {}").format(choice))
         print(String("you have {} cows remaining").format(user_cows_remaining))
+        # END OF PLAYER MOVE
                 
-        # impi makes it's move
+        # START OF IMPI MOVE
         print("impi is considering its move...")
         
         # temporary impi 'ai'
@@ -115,6 +116,7 @@ def main():
               
         print(String("Impi chose {0}").format(impi_move_choice)) 
         print(String("Impi has {} cows remaining").format(impi_cows_remaining))
+        # END OF IMPI MOVE
     
     print("***MOOVING PHASE***")
 
