@@ -115,6 +115,8 @@ def main():
                 
                 impi_cows_remaining -= 1
                 break
+                
+            print("Impi has made the wrong move, choosing again...")
               
         print(String("Impi chose {0}").format(impi_move_choice)) 
         print(String("Impi has {} cows remaining").format(impi_cows_remaining))
