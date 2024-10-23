@@ -14,6 +14,7 @@ from rules import print_rules
 from intro import print_intro
 from board_piece import Board_Piece
 from board import draw_board
+from random import randint
 
 def main():
     var user_cows_remaining = 12
@@ -54,64 +55,63 @@ def main():
     
     Python.add_to_path(".")
     py_input = Python.import_module("builtins").input
-    user_cow_choice = py_input("dark or light cows (dark cows move first)? ")
     
-    # player chooses which cows they want (light or dark)
-    if user_cow_choice == "dark":
-        print("you have chosen dark cows")
-        try:
-            draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"])
-        except:
-            print("error drawing board") 
-    elif user_cow_choice == "light":
-        print("you have chosen light cows")
-        try:
-            draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"])
-        except:
-            print("error drawing board")
-    else:
-        while user_cow_choice != "dark" and user_cow_choice != "light":
-            print("invalid input, please try again")
-            user_cow_choice = py_input("dark or light cows (dark cows move first)? ")
-            if user_cow_choice == "dark":
-                print("you have chosen dark cows")
-                try:
-                    draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"])
-                except:
-                    print("error drawing board")
-            elif user_cow_choice == "light":
-                print("you have chosen light cows")
-                try:
-                    draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"])
-                except:
-                    print("error drawing board")
-         
-    # player makes their move       
-    if user_cow_choice == "dark":
+    try:
+        draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"])
+    except:
+        print("error drawing board") 
+                    
+    while user_cows_remaining > 0 and impi_cows_remaining > 0:
+        # player makes their move       
         user_move_choice = py_input("make your move: ")
         choice = str(user_move_choice)
-        if possible_moves.__contains__(choice):
-            print("move accepted")
+        # check to see if choice is valid and if you or impi aren't already on that spot
+        if possible_moves.__contains__(choice) and possible_moves[choice].name != "⑁⚇" and possible_moves[choice].name != "⑁⚉":
             # change board position into a dark cow
             possible_moves[choice].name = "⑁⚇"
+            
             try:
                 draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"])
             except:
                 print("error drawing board")
+                
+            user_cows_remaining -= 1
         else:
             while choice not in possible_moves:
                 print("invalid move, please try again") 
-                user_move_choice = py_input("make your move: ")
-                choice = str(user_move_choice)
-                if possible_moves.__contains__(choice):
-                    print("move accepted")
-                    # change board position into a dark cow
-                    possible_moves[choice].name = "⑁⚇"
-                    try:
-                        draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"])
-                    except:
-                        print("error drawing board")              
-    elif user_cow_choice == "light":
+                break     
+                
+        print(String("you chose {}").format(choice))
+                
+        # impi makes it's move
         print("impi is considering its move...")
         
+        var impi_move_choice: String = "a1" 
+        
+        # check to see if choice is valid and if you or impi aren't already on that spot
+        if possible_moves[impi_move_choice].name != "⑁⚇" and possible_moves[impi_move_choice].name != "⑁⚉":
+            # temporary impi 'ai'
+            var chosen_letter: String = "a" 
+            var chosen_num: String = "1" 
+            
+            var impi_choices = ["a1", "d1", "g1", "b2", "d2", "f2", "c3", "d3", "e3", "a4", "b4", "c4", "e4", "f4", "g4", "c5", "d5", "e5", "b6", "d6", "f6", "a7", "d7", "g7"]
+            
+            rnd = Python.import_module("random")
+            
+            chosen_location = str(rnd.choice(impi_choices))
+            
+            impi_move_choice = String("{}").format(chosen_location)
+            
+            # change board position into a light cow
+            possible_moves[impi_move_choice].name = "⑁⚉"
+            
+            try:
+                draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"])
+            except:
+                print("error drawing board")
+            
+            impi_cows_remaining -= 1
+              
+        print(String("Impi chose {0}").format(impi_move_choice)) 
+
     # end
