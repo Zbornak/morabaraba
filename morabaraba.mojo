@@ -66,7 +66,7 @@ def main():
         user_move_choice = py_input("make your move: ")
         choice = str(user_move_choice)
         # check to see if choice is valid and if you or impi aren't already on that spot
-        if possible_moves.__contains__(choice) and (possible_moves[choice].name != "⑁⚇" or possible_moves[choice].name != "⑁⚉"):
+        if choice in possible_moves and possible_moves[choice].name != "⑁⚇" and possible_moves[choice].name != "⑁⚉":
             # change board position into a dark cow
             possible_moves[choice].name = "⑁⚇"
             
@@ -89,7 +89,7 @@ def main():
         var impi_move_choice: String = "a1" 
         
         # check to see if choice is valid and if you or impi aren't already on that spot
-        if possible_moves[impi_move_choice].name != "⑁⚇" or possible_moves[impi_move_choice].name != "⑁⚉":
+        if possible_moves[impi_move_choice].name != "⑁⚇" and possible_moves[impi_move_choice].name != "⑁⚉":
             # temporary impi 'ai'
             var chosen_letter: String = "a" 
             var chosen_num: String = "1" 
