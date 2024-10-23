@@ -60,7 +60,9 @@ def main():
         draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"])
     except:
         print("error drawing board") 
-                    
+    
+    print("***PLACING PHASE***")
+                     
     while user_cows_remaining > 0 and impi_cows_remaining > 0:
         # player makes their move       
         user_move_choice = py_input("make your move: ")
@@ -86,22 +88,21 @@ def main():
         # impi makes it's move
         print("impi is considering its move...")
         
+        # temporary impi 'ai'
         var impi_move_choice: String = "a1" 
+        var chosen_letter: String = "a" 
+        var chosen_num: String = "1" 
+        
+        var impi_choices = ["a1", "d1", "g1", "b2", "d2", "f2", "c3", "d3", "e3", "a4", "b4", "c4", "e4", "f4", "g4", "c5", "d5", "e5", "b6", "d6", "f6", "a7", "d7", "g7"]
+        
+        rnd = Python.import_module("random")
+        
+        chosen_location = str(rnd.choice(impi_choices))
+        
+        impi_move_choice = String("{}").format(chosen_location)
         
         # check to see if choice is valid and if you or impi aren't already on that spot
         if possible_moves[impi_move_choice].name != "⑁⚇" and possible_moves[impi_move_choice].name != "⑁⚉":
-            # temporary impi 'ai'
-            var chosen_letter: String = "a" 
-            var chosen_num: String = "1" 
-            
-            var impi_choices = ["a1", "d1", "g1", "b2", "d2", "f2", "c3", "d3", "e3", "a4", "b4", "c4", "e4", "f4", "g4", "c5", "d5", "e5", "b6", "d6", "f6", "a7", "d7", "g7"]
-            
-            rnd = Python.import_module("random")
-            
-            chosen_location = str(rnd.choice(impi_choices))
-            
-            impi_move_choice = String("{}").format(chosen_location)
-            
             # change board position into a light cow
             possible_moves[impi_move_choice].name = "⑁⚉"
             
@@ -114,5 +115,7 @@ def main():
               
         print(String("Impi chose {0}").format(impi_move_choice)) 
         print(String("Impi has {} cows remaining").format(impi_cows_remaining))
+    
+    print("***MOOVING PHASE***")
 
     # end
