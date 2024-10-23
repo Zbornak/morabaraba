@@ -1,5 +1,5 @@
 # MORABARABA
-# by Zbornak (2024), powered by Impi ai
+# by Zbornak (2024), powered by Impi ai and Mojo
 #     
 #              (__)    
 #       `------(><)
