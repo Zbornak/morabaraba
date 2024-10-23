@@ -66,7 +66,7 @@ def main():
         user_move_choice = py_input("make your move: ")
         choice = str(user_move_choice)
         # check to see if choice is valid and if you or impi aren't already on that spot
-        if possible_moves.__contains__(choice) and possible_moves[choice].name != "⑁⚇" and possible_moves[choice].name != "⑁⚉":
+        if possible_moves.__contains__(choice) and (possible_moves[choice].name != "⑁⚇" or possible_moves[choice].name != "⑁⚉"):
             # change board position into a dark cow
             possible_moves[choice].name = "⑁⚇"
             
@@ -77,11 +77,11 @@ def main():
                 
             user_cows_remaining -= 1
         else:
-            while choice not in possible_moves:
-                print("invalid move, please try again") 
-                break     
-                
+            print("invalid move, please try again") 
+            continue
+                   
         print(String("you chose {}").format(choice))
+        print(String("you have {} cows remaining").format(user_cows_remaining))
                 
         # impi makes it's move
         print("impi is considering its move...")
@@ -89,7 +89,7 @@ def main():
         var impi_move_choice: String = "a1" 
         
         # check to see if choice is valid and if you or impi aren't already on that spot
-        if possible_moves[impi_move_choice].name != "⑁⚇" and possible_moves[impi_move_choice].name != "⑁⚉":
+        if possible_moves[impi_move_choice].name != "⑁⚇" or possible_moves[impi_move_choice].name != "⑁⚉":
             # temporary impi 'ai'
             var chosen_letter: String = "a" 
             var chosen_num: String = "1" 
@@ -113,5 +113,6 @@ def main():
             impi_cows_remaining -= 1
               
         print(String("Impi chose {0}").format(impi_move_choice)) 
+        print(String("Impi has {} cows remaining").format(impi_cows_remaining))
 
     # end
