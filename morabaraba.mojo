@@ -94,6 +94,16 @@ def main():
     else:
         print("no mill!")
         
+    if test_for_mill("d6", mill_list):
+        print("mill!")
+    else:
+        print("no mill!")
+        
+    if test_for_mill("d7", mill_list):
+        print("mill!")
+    else:
+        print("no mill!")
+        
     for i in mill_list[0]:
         print(i[])
     # end of test
