@@ -9,12 +9,14 @@
 # A traditional 2-player strategy game from South Africa
 
 from collections import Dict
+from collections import List
 from python import Python
 from rules import print_rules
 from intro import print_intro
 from board_piece import Board_Piece
 from board import draw_board
 from random import randint
+from mills import test_for_mill
 
 def main():
     var user_cows_remaining = 12
@@ -50,6 +52,29 @@ def main():
     possible_moves["a1"] = Board_Piece("a1")
     possible_moves["d1"] = Board_Piece("d1")
     possible_moves["g1"] = Board_Piece("g1")
+    
+    # All possible mills(20)
+    var mill_12 = List[String]("d5", "d6", "d7")
+    var mill_1 = List[String]("e5", "f6", "g7")
+    var mill_3 = List[String]("e4", "f4", "g4")
+    var mill_5 = List[String]("e3", "f2", "g1")
+    var mill_6 = List[String]("d1", "d2", "d3")
+    var mill_7 = List[String]("a1", "b2", "c3")
+    var mill_9 = List[String]("a4", "b4", "c4")
+    var mill_11 = List[String]("c5", "b6", "a7")
+    var mill_TH = List[String]("a7", "d7", "g7")
+    var mill_BH = List[String]("a1", "d1", "g1")
+    var mill_VL = List[String]("a1", "a4", "a7")
+    var mill_VR = List[String]("g1", "g4", "g7")
+    var mill_MT = List[String]("b6", "d6", "f6")
+    var mill_MB = List[String]("b2", "d2", "f2")
+    var mill_ML = List[String]("b2", "b4", "b6")
+    var mill_MR = List[String]("f2", "f4", "f6")
+    var mill_CT = List[String]("c5", "d5", "e5")
+    var mill_CB = List[String]("c3", "d3", "e3")
+    var mill_CL = List[String]("c3", "c4", "c5")
+    var mill_CR = List[String]("e3", "e4", "e5")
+    var mill_list = List(mill_12, mill_1, mill_3, mill_5, mill_6, mill_7, mill_9, mill_11, mill_TH, mill_BH, mill_VL, mill_VR, mill_MT, mill_MB, mill_ML, mill_MR, mill_CT, mill_CB, mill_CL, mill_CR)
 
     print_intro()
     
@@ -62,6 +87,16 @@ def main():
         print("error drawing board") 
     
     print("***PLACING PHASE***")
+    
+    # testing mill test function
+    if test_for_mill("d5", mill_list):
+        print("mill!")
+    else:
+        print("no mill!")
+        
+    for i in mill_list[0]:
+        print(i[])
+    # end of test
                      
     while user_cows_remaining > 0 and impi_cows_remaining > 0:
         # START OF PLAYER MOVE       
