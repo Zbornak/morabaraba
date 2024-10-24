@@ -107,16 +107,16 @@ def main():
             if possible_moves[impi_move_choice].name != "⑁⚇" and possible_moves[impi_move_choice].name != "⑁⚉":
                 # change board position into a light cow
                 possible_moves[impi_move_choice].name = "⑁⚉"
+                impi_cows_remaining -= 1
                 
                 try:
                     draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"])
                 except:
                     print("error drawing board")
-                
-                impi_cows_remaining -= 1
+                    
                 break
                 
-            print("Impi has made the wrong move, choosing again...")
+            print("Impi has made the wrong move, choosing again...")   
               
         print(String("Impi chose {0}").format(impi_move_choice)) 
         print(String("Impi has {} cows remaining").format(impi_cows_remaining))
