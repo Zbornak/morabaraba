@@ -89,20 +89,21 @@ def main():
         # START OF IMPI MOVE
         print("impi is considering its move...")
         
-        # temporary impi 'ai'
-        var impi_move_choice: String = "a1" 
-        var chosen_letter: String = "a" 
-        var chosen_num: String = "1" 
-        
-        var impi_choices = ["a1", "d1", "g1", "b2", "d2", "f2", "c3", "d3", "e3", "a4", "b4", "c4", "e4", "f4", "g4", "c5", "d5", "e5", "b6", "d6", "f6", "a7", "d7", "g7"]
-        
-        rnd = Python.import_module("random")
-        
-        chosen_location = str(rnd.choice(impi_choices))
-        
-        impi_move_choice = String("{}").format(chosen_location)
+        var impi_move_choice: String = ""
         
         while True:
+            # temporary impi 'ai' 
+            var chosen_letter: String = "a" 
+            var chosen_num: String = "1" 
+            
+            var impi_choices = ["a1", "d1", "g1", "b2", "d2", "f2", "c3", "d3", "e3", "a4", "b4", "c4", "e4", "f4", "g4", "c5", "d5", "e5", "b6", "d6", "f6", "a7", "d7", "g7"]
+            
+            rnd = Python.import_module("random")
+            
+            chosen_location = str(rnd.choice(impi_choices))
+            
+            impi_move_choice = String("{}").format(chosen_location)
+            
             # check to see if choice is valid and if you or impi aren't already on that spot
             if possible_moves[impi_move_choice].name != "⑁⚇" and possible_moves[impi_move_choice].name != "⑁⚉":
                 # change board position into a light cow
