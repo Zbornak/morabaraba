@@ -11,6 +11,7 @@ def test_for_mill(move: String, inout mill_list: List[List[String]]) -> Bool:
         remove_item(mill_list[i], move)
         
         if not mill_list[i]:
+            # remove mill array from main list to stop player getting a mill every turn after getting 1 mill
             var removed_item = mill_list.pop(i)
             return True
     
