@@ -87,26 +87,6 @@ def main():
         print("error drawing board") 
     
     print("***PLACING PHASE***")
-    
-    # testing mill test function
-    if test_for_mill("d5", mill_list):
-        print("mill!")
-    else:
-        print("no mill!")
-        
-    if test_for_mill("d6", mill_list):
-        print("mill!")
-    else:
-        print("no mill!")
-        
-    if test_for_mill("d7", mill_list):
-        print("mill!")
-    else:
-        print("no mill!")
-        
-    for i in mill_list[0]:
-        print(i[])
-    # end of test
                      
     while user_cows_remaining > 0 and impi_cows_remaining > 0:
         # START OF PLAYER MOVE       
@@ -130,6 +110,18 @@ def main():
                    
         print(String("you chose {}").format(choice))
         print(String("you have {} cows remaining").format(user_cows_remaining))
+        
+        # test for a mill
+        if test_for_mill(choice, mill_list):
+            user_shot_choice = py_input("you have a mill, choose a cow to shoot: ")
+            shot_choice = str(user_shot_choice)
+            if shot_choice in possible_moves and possible_moves[shot_choice].name != "⑁⚇" and possible_moves[shot_choice].name == "⑁⚉":
+                possible_moves[shot_choice].name = "XX"
+                print(String("you have shot Impi's cow at position {}").format(shot_choice))
+            else:
+                print("invalid move, please try again") 
+                continue
+                
         # END OF PLAYER MOVE
                 
         # START OF IMPI MOVE
