@@ -116,8 +116,10 @@ def main():
             user_shot_choice = py_input("you have a mill, choose a cow to shoot: ")
             shot_choice = str(user_shot_choice)
             if shot_choice in possible_moves and possible_moves[shot_choice].name != "⑁⚇" and possible_moves[shot_choice].name == "⑁⚉":
-                possible_moves[shot_choice].name = "XX"
+                possible_moves[shot_choice].name = shot_choice
                 print(String("you have shot Impi's cow at position {}").format(shot_choice))
+                # return position to mill list
+                
             else:
                 print("invalid move, please try again") 
                 continue
