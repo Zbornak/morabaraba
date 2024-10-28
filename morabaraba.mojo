@@ -28,30 +28,30 @@ def main():
     var impi_dead_cows = 0
     
     var possible_moves = Dict[String, Board_Piece]()
-    possible_moves["a7"] = Board_Piece("a7", "unowned")
-    possible_moves["d7"] = Board_Piece("d7", "unowned")
-    possible_moves["g7"] = Board_Piece("g7", "unowned")
-    possible_moves["b6"] = Board_Piece("b6", "unowned")
-    possible_moves["d6"] = Board_Piece("d6", "unowned")
-    possible_moves["f6"] = Board_Piece("f6", "unowned")
-    possible_moves["c5"] = Board_Piece("c5", "unowned")
-    possible_moves["d5"] = Board_Piece("d5", "unowned")
-    possible_moves["e5"] = Board_Piece("e5", "unowned")
-    possible_moves["a4"] = Board_Piece("a4", "unowned")
-    possible_moves["b4"] = Board_Piece("b4", "unowned")
-    possible_moves["c4"] = Board_Piece("c4", "unowned")
-    possible_moves["e4"] = Board_Piece("e4", "unowned")
-    possible_moves["f4"] = Board_Piece("f4", "unowned")
-    possible_moves["g4"] = Board_Piece("g4", "unowned")
-    possible_moves["c3"] = Board_Piece("c3", "unowned")
-    possible_moves["d3"] = Board_Piece("d3", "unowned")
-    possible_moves["e3"] = Board_Piece("e3", "unowned")
-    possible_moves["b2"] = Board_Piece("b2", "unowned")
-    possible_moves["d2"] = Board_Piece("d2", "unowned")
-    possible_moves["f2"] = Board_Piece("f2", "unowned")
-    possible_moves["a1"] = Board_Piece("a1", "unowned")
-    possible_moves["d1"] = Board_Piece("d1", "unowned")
-    possible_moves["g1"] = Board_Piece("g1", "unowned")
+    possible_moves["a7"] = Board_Piece("a7")
+    possible_moves["d7"] = Board_Piece("d7")
+    possible_moves["g7"] = Board_Piece("g7")
+    possible_moves["b6"] = Board_Piece("b6")
+    possible_moves["d6"] = Board_Piece("d6")
+    possible_moves["f6"] = Board_Piece("f6")
+    possible_moves["c5"] = Board_Piece("c5")
+    possible_moves["d5"] = Board_Piece("d5")
+    possible_moves["e5"] = Board_Piece("e5")
+    possible_moves["a4"] = Board_Piece("a4")
+    possible_moves["b4"] = Board_Piece("b4")
+    possible_moves["c4"] = Board_Piece("c4")
+    possible_moves["e4"] = Board_Piece("e4")
+    possible_moves["f4"] = Board_Piece("f4")
+    possible_moves["g4"] = Board_Piece("g4")
+    possible_moves["c3"] = Board_Piece("c3")
+    possible_moves["d3"] = Board_Piece("d3")
+    possible_moves["e3"] = Board_Piece("e3")
+    possible_moves["b2"] = Board_Piece("b2")
+    possible_moves["d2"] = Board_Piece("d2")
+    possible_moves["f2"] = Board_Piece("f2")
+    possible_moves["a1"] = Board_Piece("a1")
+    possible_moves["d1"] = Board_Piece("d1")
+    possible_moves["g1"] = Board_Piece("g1")
     
     # All possible mills(20)
     var mill_12 = List[String]("d5", "d6", "d7")
@@ -97,9 +97,6 @@ def main():
             # change board position into a dark cow
             possible_moves[choice].name = "⑁⚇"
             
-            # make player owner of piece
-            possible_moves[choice].owner = "player"
-            
             try:
                 draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"])
             except:
@@ -116,13 +113,11 @@ def main():
         
         # test for a mill
         # ISSUE if you choose an invalid move once you cannot correct (move always invalid)
-        if test_for_mill("player", choice, mill_list, possible_moves):
+        if test_for_mill(choice, mill_list):
             user_shot_choice = py_input("you have a mill, choose a cow to shoot: ")
             shot_choice = str(user_shot_choice)
             if shot_choice in possible_moves and possible_moves[shot_choice].name != "⑁⚇" and possible_moves[shot_choice].name == "⑁⚉":
                 possible_moves[shot_choice].name = shot_choice
-                # revert piece back to 'unowned'
-                possible_moves[shot_choice].owner = "unowned"
                 print(String("you have shot Impi's cow at position {}").format(shot_choice))
                 
             else:
@@ -153,10 +148,6 @@ def main():
             if possible_moves[impi_move_choice].name != "⑁⚇" and possible_moves[impi_move_choice].name != "⑁⚉":
                 # change board position into a light cow
                 possible_moves[impi_move_choice].name = "⑁⚉"
-                
-                # make impi owner of piece
-                possible_moves[impi_move_choice].owner = "impi"
-            
                 impi_cows_remaining -= 1
                 impi_cows_in_play += 1
                 
@@ -174,7 +165,7 @@ def main():
         
         # test for a mill
         # ISSUE when this code is added, impi's moves contribute to player mills!
-        if test_for_mill("impi", impi_move_choice, mill_list, possible_moves):
+        if test_for_mill(impi_move_choice, mill_list):
             print("impi has a mill")
             var impi_shot_choice: String = ""
             
@@ -182,9 +173,6 @@ def main():
                 if item[].value.name == "⑁⚇":
                     impi_shot_choice = item[].key
                     possible_moves[impi_shot_choice].name = impi_shot_choice
-                    
-                    #set ownership back to 'unowned'
-                    possible_moves[impi_shot_choice].owner = "unowned"
                     
             print(String("Impi has shot your cow at position {}").format(impi_shot_choice))
             
