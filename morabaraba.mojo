@@ -112,13 +112,13 @@ def main():
         print(String("you have {} cows remaining").format(user_cows_remaining))
         
         # test for a mill
+        # ISSUE if you choose an invalid move once you cannot correct (move always invalid)
         if test_for_mill(choice, mill_list):
             user_shot_choice = py_input("you have a mill, choose a cow to shoot: ")
             shot_choice = str(user_shot_choice)
             if shot_choice in possible_moves and possible_moves[shot_choice].name != "⑁⚇" and possible_moves[shot_choice].name == "⑁⚉":
                 possible_moves[shot_choice].name = shot_choice
                 print(String("you have shot Impi's cow at position {}").format(shot_choice))
-                # return position to mill list
                 
             else:
                 print("invalid move, please try again") 
@@ -162,6 +162,25 @@ def main():
               
         print(String("Impi chose {0}").format(impi_move_choice)) 
         print(String("Impi has {} cows remaining").format(impi_cows_remaining))
+        
+        # test for a mill
+        # ISSUE when this code is added, impi's moves contribute to player mills!
+        if test_for_mill(impi_move_choice, mill_list):
+            print("impi has a mill")
+            var impi_shot_choice: String = ""
+            
+            for item in possible_moves.items():
+                if item[].value.name == "⑁⚇":
+                    impi_shot_choice = item[].key
+                    possible_moves[impi_shot_choice].name = impi_shot_choice
+                    
+            print(String("Impi has shot your cow at position {}").format(impi_shot_choice))
+            
+            try:
+                draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"])
+            except:
+                print("error drawing board") 
+                
         # END OF IMPI MOVE
     
     print("***MOOVING PHASE***")
