@@ -74,8 +74,30 @@ def main():
     var mill_CB = List[String]("c3", "d3", "e3")
     var mill_CL = List[String]("c3", "c4", "c5")
     var mill_CR = List[String]("e3", "e4", "e5")
-    var mill_list = List(mill_12, mill_1, mill_3, mill_5, mill_6, mill_7, mill_9, mill_11, mill_TH, mill_BH, mill_VL, mill_VR, mill_MT, mill_MB, mill_ML, mill_MR, mill_CT, mill_CB, mill_CL, mill_CR)
+    var player_mill_list = List(mill_12, mill_1, mill_3, mill_5, mill_6, mill_7, mill_9, mill_11, mill_TH, mill_BH, mill_VL, mill_VR, mill_MT, mill_MB, mill_ML, mill_MR, mill_CT, mill_CB, mill_CL, mill_CR)
 
+    var impi_mill_12 = List[String]("d5", "d6", "d7")
+    var impi_mill_1 = List[String]("e5", "f6", "g7")
+    var impi_mill_3 = List[String]("e4", "f4", "g4")
+    var impi_mill_5 = List[String]("e3", "f2", "g1")
+    var impi_mill_6 = List[String]("d1", "d2", "d3")
+    var impi_mill_7 = List[String]("a1", "b2", "c3")
+    var impi_mill_9 = List[String]("a4", "b4", "c4")
+    var impi_mill_11 = List[String]("c5", "b6", "a7")
+    var impi_mill_TH = List[String]("a7", "d7", "g7")
+    var impi_mill_BH = List[String]("a1", "d1", "g1")
+    var impi_mill_VL = List[String]("a1", "a4", "a7")
+    var impi_mill_VR = List[String]("g1", "g4", "g7")
+    var impi_mill_MT = List[String]("b6", "d6", "f6")
+    var impi_mill_MB = List[String]("b2", "d2", "f2")
+    var impi_mill_ML = List[String]("b2", "b4", "b6")
+    var impi_mill_MR = List[String]("f2", "f4", "f6")
+    var impi_mill_CT = List[String]("c5", "d5", "e5")
+    var impi_mill_CB = List[String]("c3", "d3", "e3")
+    var impi_mill_CL = List[String]("c3", "c4", "c5")
+    var impi_mill_CR = List[String]("e3", "e4", "e5")
+    var impi_mill_list = List(impi_mill_12, impi_mill_1, impi_mill_3, impi_mill_5, impi_mill_6, impi_mill_7, impi_mill_9, impi_mill_11, impi_mill_TH, impi_mill_BH, impi_mill_VL, impi_mill_VR, impi_mill_MT, impi_mill_MB, impi_mill_ML, impi_mill_MR, impi_mill_CT, impi_mill_CB, impi_mill_CL, impi_mill_CR)
+    
     print_intro()
     
     Python.add_to_path(".")
@@ -113,7 +135,7 @@ def main():
         
         # test for a mill
         # ISSUE if you choose an invalid move once you cannot correct (move always invalid)
-        if test_for_mill(choice, mill_list):
+        if test_for_mill(choice, player_mill_list):
             user_shot_choice = py_input("you have a mill, choose a cow to shoot: ")
             shot_choice = str(user_shot_choice)
             if shot_choice in possible_moves and possible_moves[shot_choice].name != "⑁⚇" and possible_moves[shot_choice].name == "⑁⚉":
@@ -165,7 +187,7 @@ def main():
         
         # test for a mill
         # ISSUE when this code is added, impi's moves contribute to player mills!
-        if test_for_mill(impi_move_choice, mill_list):
+        if test_for_mill(impi_move_choice, impi_mill_list):
             print("impi has a mill")
             var impi_shot_choice: String = ""
             
