@@ -17,6 +17,7 @@ from board_piece import Board_Piece
 from board import draw_board
 from random import randint
 from mills import test_for_mill
+from mills import react_to_mill
 
 def main():
     var user_cows_remaining = 12
@@ -135,18 +136,14 @@ def main():
         
         # test for a mill
         # ISSUE if you choose an invalid move once you cannot correct (move always invalid)
-        if test_for_mill(choice, player_mill_list):
+        while test_for_mill(choice, player_mill_list):
             user_shot_choice = py_input("you have a mill, choose a cow to shoot: ")
             shot_choice = str(user_shot_choice)
-            if shot_choice in possible_moves and possible_moves[shot_choice].name != "⑁⚇" and possible_moves[shot_choice].name == "⑁⚉":
-                possible_moves[shot_choice].name = shot_choice
-                print(String("you have shot Impi's cow at position {}").format(shot_choice))
-                impi_dead_cows += 1
-                impi_cows_in_play -= 1
+            if react_to_mill(shot_choice, possible_moves, impi_dead_cows, impi_cows_in_play):
+                break
                 
-            else:
-                print("invalid move, please try again") 
-                continue
+            print("invalid move, please try again")
+            
                 
         # END OF PLAYER MOVE
                 
