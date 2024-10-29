@@ -188,7 +188,6 @@ def main():
         print(String("Impi has {} cows remaining").format(impi_cows_remaining))
         
         # test for a mill
-        # ISSUE when this code is added, impi's moves contribute to player mills!
         if test_for_mill(impi_move_choice, impi_mill_list):
             print("impi has a mill")
             var impi_shot_choice: String = ""
