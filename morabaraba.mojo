@@ -141,6 +141,8 @@ def main():
             if shot_choice in possible_moves and possible_moves[shot_choice].name != "⑁⚇" and possible_moves[shot_choice].name == "⑁⚉":
                 possible_moves[shot_choice].name = shot_choice
                 print(String("you have shot Impi's cow at position {}").format(shot_choice))
+                impi_dead_cows += 1
+                impi_cows_in_play -= 1
                 
             else:
                 print("invalid move, please try again") 
@@ -197,6 +199,8 @@ def main():
                     possible_moves[impi_shot_choice].name = impi_shot_choice
                     
             print(String("Impi has shot your cow at position {}").format(impi_shot_choice))
+            user_dead_cows += 1
+            user_cows_in_play -= 1
             
             try:
                 draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"])
