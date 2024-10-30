@@ -140,9 +140,10 @@ def main():
             user_shot_choice = py_input("you have a mill, choose a cow to shoot: ")
             shot_choice = str(user_shot_choice)
             if react_to_mill(shot_choice, possible_moves, impi_dead_cows, impi_cows_in_play):
-                break
+                continue
             else: 
                 print("invalid move, please try again")
+                break
         # END OF PLAYER MOVE
                 
         # START OF IMPI MOVE
@@ -177,7 +178,8 @@ def main():
                     
                 break
                 
-            print("Impi has made the wrong move, choosing again...")   
+            # test to see if counter is correct if impi chooses an invalid position   
+            # print("Impi has made the wrong move, choosing again...")   
               
         print(String("Impi chose {0}").format(impi_move_choice)) 
         print(String("Impi has {} cows remaining").format(impi_cows_remaining))
@@ -191,6 +193,8 @@ def main():
                 if item[].value.name == "⑁⚇":
                     impi_shot_choice = item[].key
                     possible_moves[impi_shot_choice].name = impi_shot_choice
+                    # stop impi from shooting all player cows
+                    break
                     
             print(String("Impi has shot your cow at position {}").format(impi_shot_choice))
             user_dead_cows += 1
