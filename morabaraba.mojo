@@ -135,15 +135,21 @@ def main():
         print(String("you have {} cows remaining").format(user_cows_remaining))
         
         # test for a mill
-        # ISSUE if you choose an invalid move your shot turn is skipped
-        while test_for_mill(choice, player_mill_list):
-            user_shot_choice = py_input("you have a mill, choose a cow to shoot: ")
-            shot_choice = str(user_shot_choice)
-            if react_to_mill(shot_choice, possible_moves, impi_dead_cows, impi_cows_in_play):
-                continue
-            else: 
-                print("invalid move, please try again")
+        while True:
+            if not test_for_mill(choice, player_mill_list):
                 break
+    
+            while True:
+                py_user_shot_choice = py_input("you have a mill, choose a cow to shoot: ")
+                user_shot_choice = str(py_user_shot_choice)
+                if react_to_mill(user_shot_choice, possible_moves, impi_dead_cows, impi_cows_in_play):
+                    # exit inner loop if a valid move is made
+                    break  
+                else:
+                    print("invalid move, please try again")
+    
+            # If we've reached here, a valid move was made, so we can break the outer loop
+            break
         # END OF PLAYER MOVE
                 
         # START OF IMPI MOVE
