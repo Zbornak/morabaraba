@@ -21,7 +21,7 @@ def test_for_mill(move: String, inout mill_list: List[List[String]], inout possi
     
 def react_to_mill(inout choice: String, inout possible_moves: Dict[String, Board_Piece], inout dead_cows: Int, inout cows_in_play: Int) -> Bool:
     if not possible_moves[choice].in_mill:
-        if choice in possible_moves and possible_moves[choice].name != "⑁⚇" and possible_moves[choice].name == "⑁⚉":
+        if choice in possible_moves and possible_moves[choice].ownership == "impi":
             possible_moves[choice].name = choice
             
             # change board piece status from impi to unowned
@@ -38,6 +38,9 @@ def react_to_mill(inout choice: String, inout possible_moves: Dict[String, Board
     else:
         print("you cannot shoot a cow in a mill, please make another choice")
         return False
+        
+def check_if_cow_is_in_mill(cow_position: String, inout possible_moves: Dict[String, Board_Piece]) -> Bool:
+    return True
     
     
     

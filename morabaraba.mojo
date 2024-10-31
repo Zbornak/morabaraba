@@ -18,6 +18,7 @@ from board import draw_board
 from random import randint
 from mills import test_for_mill
 from mills import react_to_mill
+from mills import check_if_cow_is_in_mill
 
 def main():
     var user_cows_remaining = 12
