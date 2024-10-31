@@ -12,6 +12,10 @@ def test_for_mill(move: String, inout mill_list: List[List[String]], inout possi
     for i in range(len(mill_list)):
         remove_item(mill_list[i], move)
         
+        # mark board position as in mill if position is alone in mill list
+        if len(mill_list[i]) == 0:
+            possible_moves[move].in_mill = True
+        
         if not mill_list[i]:
             # remove mill array from main list to stop player getting a mill every turn after getting 1 mill
             var removed_item = mill_list.pop(i)
@@ -38,9 +42,6 @@ def react_to_mill(inout choice: String, inout possible_moves: Dict[String, Board
     else:
         print("you cannot shoot a cow in a mill, please make another choice")
         return False
-        
-def check_if_cow_is_in_mill(cow_position: String, inout possible_moves: Dict[String, Board_Piece]) -> Bool:
-    return True
     
     
     
