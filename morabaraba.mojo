@@ -154,7 +154,7 @@ def main():
                     # exit inner loop if a valid move is made
                     break  
                 else:
-                    print("invalid move, please try again")
+                    print("invalid move, remember you can only shoot Impi's cows which are not currently in a mill")
     
             # valid move was made, break the outer loop
             break
