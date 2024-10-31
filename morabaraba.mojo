@@ -236,6 +236,7 @@ def main():
     print("***MOOVING PHASE***")
     
     print("to make a move, type 'current cow position' to 'new cow position' eg. c4 to g1")
+    print("remember you can only move your cows to adjacent empty board positions")
     print("make your move: ")
 
     # end of program
