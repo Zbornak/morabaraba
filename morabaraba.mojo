@@ -120,6 +120,9 @@ def main():
             # change board position into a dark cow
             possible_moves[choice].name = "⑁⚇"
             
+            # change board status from unowned to player
+            possible_moves[choice].ownership = "player"
+            
             try:
                 draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"])
             except:
@@ -136,7 +139,7 @@ def main():
         
         # test for a mill
         while True:
-            if not test_for_mill(choice, player_mill_list):
+            if not test_for_mill(choice, player_mill_list, possible_moves):
                 break
     
             while True:
@@ -174,6 +177,10 @@ def main():
             if possible_moves[impi_move_choice].name != "⑁⚇" and possible_moves[impi_move_choice].name != "⑁⚉":
                 # change board position into a light cow
                 possible_moves[impi_move_choice].name = "⑁⚉"
+                
+                # change board piece status from unowned to impi
+                possible_moves[impi_move_choice].ownership = "impi"
+            
                 impi_cows_remaining -= 1
                 impi_cows_in_play += 1
                 
@@ -191,7 +198,7 @@ def main():
         print(String("Impi has {} cows remaining").format(impi_cows_remaining))
         
         # test for a mill
-        if test_for_mill(impi_move_choice, impi_mill_list):
+        if test_for_mill(impi_move_choice, impi_mill_list, possible_moves):
             print("impi has a mill")
             var impi_shot_choice: String = ""
             
@@ -199,6 +206,10 @@ def main():
                 if item[].value.name == "⑁⚇":
                     impi_shot_choice = item[].key
                     possible_moves[impi_shot_choice].name = impi_shot_choice
+                    
+                    # change board piece status from player to unowned
+                    possible_moves[impi_shot_choice].ownership = "unowned"
+                    
                     # stop impi from shooting all player cows after 1 mill
                     break
                     

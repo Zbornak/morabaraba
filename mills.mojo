@@ -8,7 +8,7 @@ def remove_item(inout row: List[String], item: String):
             var removed_item = row.pop(i)
             break
 
-def test_for_mill(move: String, inout mill_list: List[List[String]]) -> Bool:
+def test_for_mill(move: String, inout mill_list: List[List[String]], inout possible_moves: Dict[String, Board_Piece]) -> Bool:
     for i in range(len(mill_list)):
         remove_item(mill_list[i], move)
         
@@ -20,15 +20,23 @@ def test_for_mill(move: String, inout mill_list: List[List[String]]) -> Bool:
     return False
     
 def react_to_mill(inout choice: String, inout possible_moves: Dict[String, Board_Piece], inout dead_cows: Int, inout cows_in_play: Int) -> Bool:
-    if choice in possible_moves and possible_moves[choice].name != "⑁⚇" and possible_moves[choice].name == "⑁⚉":
-        possible_moves[choice].name = choice
-        print(String("you have shot Impi's cow at position {}").format(choice))
-        dead_cows += 1
-        cows_in_play -= 1
-        
-        return True
-        
+    if not possible_moves[choice].in_mill:
+        if choice in possible_moves and possible_moves[choice].name != "⑁⚇" and possible_moves[choice].name == "⑁⚉":
+            possible_moves[choice].name = choice
+            
+            # change board piece status from impi to unowned
+            possible_moves[choice].ownership = "unowned"
+            
+            print(String("you have shot Impi's cow at position {}").format(choice))
+            dead_cows += 1
+            cows_in_play -= 1
+            
+            return True
+            
+        else:
+            return False
     else:
+        print("you cannot shoot a cow in a mill, please make another choice")
         return False
     
     
