@@ -1,7 +1,7 @@
 fn print_intro(): 
     print("""
     ### MORABARABA ###
-    by Zbornak, powered by Impi ai
+    by Zbornak, powered by Impi ai and Mojo🔥
     
              (__)    
       `------(><)

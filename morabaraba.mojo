@@ -110,9 +110,11 @@ def main():
         print("error drawing board") 
     
     print("***PLACING PHASE***")
+    print("you control the dark cows (⑁⚇), Impi has the light cows (⑁⚉)")
+    print("you go first")
                      
     while user_cows_remaining > 0 and impi_cows_remaining > 0:
-        # START OF PLAYER MOVE       
+        # START OF PLAYER MOVE      
         user_move_choice = py_input("make your move: ")
         choice = str(user_move_choice)
         # check to see if choice is valid and if you or impi aren't already on that spot
@@ -229,6 +231,11 @@ def main():
                 
         # END OF IMPI MOVE
     
+    print("all living cows are now in play")
+    print("")
     print("***MOOVING PHASE***")
+    
+    print("to make a move, type 'current cow position' to 'new cow position' eg. c4 to g1")
+    print("make your move: ")
 
     # end of program
