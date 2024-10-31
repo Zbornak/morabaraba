@@ -116,7 +116,7 @@ def main():
         user_move_choice = py_input("make your move: ")
         choice = str(user_move_choice)
         # check to see if choice is valid and if you or impi aren't already on that spot
-        if choice in possible_moves and possible_moves[choice].name != "⑁⚇" and possible_moves[choice].name != "⑁⚉":
+        if choice in possible_moves and possible_moves[choice].ownership == "unowned":
             # change board position into a dark cow
             possible_moves[choice].name = "⑁⚇"
             
@@ -135,6 +135,7 @@ def main():
             continue
                    
         print(String("you chose {}").format(choice))
+        print(String("{0} is now marked as owned by {1}").format(choice, possible_moves[choice].ownership))
         print(String("you have {} cows remaining").format(user_cows_remaining))
         
         # test for a mill
@@ -146,6 +147,8 @@ def main():
                 py_user_shot_choice = py_input("you have a mill, choose a cow to shoot: ")
                 user_shot_choice = str(py_user_shot_choice)
                 if react_to_mill(user_shot_choice, possible_moves, impi_dead_cows, impi_cows_in_play):
+                    print(String("{0} is now marked as {1}").format(user_shot_choice, possible_moves[user_shot_choice].ownership))
+                    
                     # exit inner loop if a valid move is made
                     break  
                 else:
@@ -174,7 +177,7 @@ def main():
             impi_move_choice = String("{}").format(chosen_location)
             
             # check to see if choice is valid and if you or impi aren't already on that spot
-            if possible_moves[impi_move_choice].name != "⑁⚇" and possible_moves[impi_move_choice].name != "⑁⚉":
+            if possible_moves[impi_move_choice].ownership == "unowned":
                 # change board position into a light cow
                 possible_moves[impi_move_choice].name = "⑁⚉"
                 
@@ -195,6 +198,7 @@ def main():
             # print("Impi has made the wrong move, choosing again...")   
               
         print(String("Impi chose {0}").format(impi_move_choice)) 
+        print(String("{0} is now marked as owned by {1}").format(impi_move_choice, possible_moves[impi_move_choice].ownership))
         print(String("Impi has {} cows remaining").format(impi_cows_remaining))
         
         # test for a mill
@@ -214,6 +218,7 @@ def main():
                     break
                     
             print(String("Impi has shot your cow at position {}").format(impi_shot_choice))
+            print(String("{0} is now marked as {1}").format(impi_shot_choice, possible_moves[impi_shot_choice].ownership))
             user_dead_cows += 1
             user_cows_in_play -= 1
             
