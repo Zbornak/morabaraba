@@ -18,6 +18,7 @@ from board import draw_board
 from random import randint
 from mills import test_for_mill
 from mills import react_to_mill
+from move import move_cow
 
 def main():
     var user_cows_remaining = 12
@@ -252,8 +253,8 @@ def main():
     print("")
     print("***MOOVING PHASE***")
     
-    print("to make a move, type 'current cow position' to 'new cow position' eg. c4 to g1")
+    print("to make a move, type 'current cow position' to 'new cow position' eg. f2 to g1")
     print("remember you can only move your cows to adjacent empty board positions")
-    print("make your move: ")
+    move_cow()
 
     # end of program
