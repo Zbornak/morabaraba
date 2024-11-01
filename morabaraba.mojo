@@ -133,6 +133,20 @@ def main():
                 
             user_cows_remaining -= 1
             user_cows_in_play += 1
+            
+        elif choice == "rules":
+            print_rules()
+            
+            try:
+                draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"])
+            except:
+                print("error drawing board")
+                
+            continue
+            
+        elif choice == "exit":
+            return 1
+        
         else:
             print("invalid move, please try again") 
             continue
@@ -155,6 +169,7 @@ def main():
                     
                     # exit inner loop if a valid move is made
                     break  
+                
                 else:
                     print("invalid move, remember you can only shoot Impi's cows which are not currently in a mill")
     
