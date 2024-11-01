@@ -117,6 +117,7 @@ def main():
         # START OF PLAYER MOVE      
         user_move_choice = py_input("make your move: ")
         choice = str(user_move_choice)
+        
         # check to see if choice is valid and if you or impi aren't already on that spot
         if choice in possible_moves and possible_moves[choice].ownership == "unowned":
             # change board position into a dark cow
@@ -148,6 +149,7 @@ def main():
             while True:
                 py_user_shot_choice = py_input("you have a mill, choose a cow to shoot: ")
                 user_shot_choice = str(py_user_shot_choice)
+                
                 if react_to_mill(user_shot_choice, possible_moves, impi_dead_cows, impi_cows_in_play):
                     print(String("{0} is now marked as {1}").format(user_shot_choice, possible_moves[user_shot_choice].ownership))
                     
