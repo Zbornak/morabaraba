@@ -17,7 +17,7 @@ from intro import print_intro
 from board_piece import Board_Piece
 from board import draw_board
 from random import randint
-from move import move_player_cow
+from move import move_cow
 
 def main():
     var player1_cows_remaining = 12
@@ -176,7 +176,7 @@ def main():
                    
         print(String("player two chose {}").format(player1_move_choice))
         print(String("{0} is now marked as owned by {1}").format(player1_move_choice, possible_moves[player1_move_choice].ownership))
-        print(String("player 2 has {} cows remaining").format(player2_cows_remaining))
+        print(String("player two has {} cows remaining").format(player2_cows_remaining))
         
         # test for a mill
         # END OF PLAYER 2 MOVE
@@ -187,6 +187,6 @@ def main():
     
     print("to make a move, type 'current cow position' to 'new cow position' eg. f2 to g1")
     print("remember you can only move your cows to adjacent empty board positions")
-    move_player_cow()
+    move_cow()
 
     # end of program

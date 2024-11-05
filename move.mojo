@@ -1,4 +1,4 @@
-def move_player_cow():
+def move_cow():
 	user_input = input("make your move: ")
 	
 	words = user_input.split(" ")
@@ -9,8 +9,3 @@ def move_player_cow():
 	else:
 		print("move accepted")
 		# check if move choice is valid
-		
-		
-		
-def move_impi_cow():
-	print("hello, mojo")
