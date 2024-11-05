@@ -10,7 +10,6 @@
 
 from collections import Dict
 from collections import List
-from collections import InlineArray
 from python import Python
 from rules import print_rules
 from intro import print_intro
@@ -28,6 +27,30 @@ def main():
     var player2_cows_in_play = 0
     var player2_dead_cows = 0
     
+    # All possible mills(20)
+    var mill_12 = List(String("d5"), String("d6"), String("d7"))
+    var mill_1 = List(String("e5"), String("f6"), String("g7"))
+    var mill_3 = List(String("e4"), String("f4"), String("g4"))
+    var mill_5 = List(String("e3"), String("f2"), String("g1"))
+    var mill_6 = List(String("d1"), String("d2"), String("d3"))
+    var mill_7 = List(String("a1"), String("b2"), String("c3"))
+    var mill_9 = List(String("a4"), String("b4"), String("c4"))
+    var mill_11 = List(String("c5"), String("b6"), String("a7"))
+    var mill_TH = List(String("a7"), String("d7"), String("g7"))
+    var mill_BH = List(String("a1"), String("d1"), String("g1"))
+    var mill_VL = List(String("a1"), String("a4"), String("a7"))
+    var mill_VR = List(String("g1"), String("g4"), String("g7"))
+    var mill_MT = List(String("b6"), String("d6"), String("f6"))
+    var mill_MB = List(String("b2"), String("d2"), String("f2"))
+    var mill_ML = List(String("b2"), String("b4"), String("b6"))
+    var mill_MR = List(String("f2"), String("f4"), String("f6"))
+    var mill_CT = List(String("c5"), String("d5"), String("e5"))
+    var mill_CB = List(String("c3"), String("d3"), String("e3"))
+    var mill_CL = List(String("c3"), String("c4"), String("c5"))
+    var mill_CR = List(String("e3"), String("e4"), String("e5"))
+    
+    var mill_list = List(mill_12, mill_1, mill_3, mill_5, mill_6, mill_7, mill_9, mill_11, mill_TH, mill_BH, mill_VL, mill_VR, mill_MT, mill_MB, mill_ML, mill_MR, mill_CT, mill_CB, mill_CL, mill_CR)   
+        
     var possible_moves = Dict[String, Board_Piece]()
     possible_moves["a7"] = Board_Piece("a7", "unowned", False)
     possible_moves["d7"] = Board_Piece("d7", "unowned", False)
