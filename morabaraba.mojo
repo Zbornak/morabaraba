@@ -17,8 +17,6 @@ from intro import print_intro
 from board_piece import Board_Piece
 from board import draw_board
 from random import randint
-from mills import test_for_mill
-from mills import react_to_mill
 from move import move_player_cow
 
 def main():
@@ -27,7 +25,7 @@ def main():
     var player1_dead_cows = 0
     
     var player2_cows_remaining = 12
-    var player2_in_play = 0
+    var player2_cows_in_play = 0
     var player2_dead_cows = 0
     
     # All possible mills(20)
@@ -134,28 +132,9 @@ def main():
                    
         print(String("player one chose {}").format(player1_move_choice))
         print(String("{0} is now marked as owned by {1}").format(player1_move_choice, possible_moves[player1_move_choice].ownership))
-        print(String("player one has {} cows remaining").format(player1_move_choice))
+        print(String("player one has {} cows remaining").format(player1_cows_remaining))
         
         # test for a mill
-        while True:
-            if not test_for_mill(player1_move_choice, mill_list, possible_moves):
-                break
-    
-            while True:
-                py_player1_shot_choice = py_input("you have a mill, choose a cow to shoot: ")
-                player1_shot_choice = str(py_player1_shot_choice)
-                
-                if react_to_mill("player1", "player2", player1_shot_choice, possible_moves, player2_dead_cows, player2_cows_in_play):
-                    print(String("{0} is now marked as {1}").format(player1_shot_choice, possible_moves[player1_shot_choice].ownership))
-                    
-                    # exit inner loop if a valid move is made
-                    break  
-                
-                else:
-                    print("invalid move, remember you can only shoot opponent's cows (not currently in a mill)")
-    
-            # valid move was made, break the outer loop
-            break
         # END OF PLAYER 1 MOVE
                 
         # START OF PLAYER 2 MOVE      
@@ -165,7 +144,7 @@ def main():
         # check to see if choice is valid and if you or player 1 aren't already on that spot
         if player2_move_choice in possible_moves and possible_moves[player2_move_choice].ownership == "unowned":
             # change board position into a dark cow
-            possible_moves[player2_move_choice].name = "⑁⚇"
+            possible_moves[player2_move_choice].name = "⑁⚉"
             
             # change board status from unowned to player 2
             possible_moves[player2_move_choice].ownership = "player2"
@@ -197,28 +176,9 @@ def main():
                    
         print(String("player two chose {}").format(player1_move_choice))
         print(String("{0} is now marked as owned by {1}").format(player1_move_choice, possible_moves[player1_move_choice].ownership))
-        print(String("player 2 has {} cows remaining").format(player1_move_choice))
+        print(String("player 2 has {} cows remaining").format(player2_cows_remaining))
         
         # test for a mill
-        while True:
-            if not test_for_mill(player2_move_choice, mill_list, possible_moves):
-                break
-    
-            while True:
-                py_player2_shot_choice = py_input("you have a mill, choose a cow to shoot: ")
-                player2_shot_choice = str(py_player2_shot_choice)
-                
-                if react_to_mill("player2", "player1", player2_shot_choice, possible_moves, player1_dead_cows, player1_cows_in_play):
-                    print(String("{0} is now marked as {1}").format(player2_shot_choice, possible_moves[player2_shot_choice].ownership))
-                    
-                    # exit inner loop if a valid move is made
-                    break  
-                
-                else:
-                    print("invalid move, remember you can only shoot opponent's cows (not currently in a mill)")
-    
-            # valid move was made, break the outer loop
-            break
         # END OF PLAYER 2 MOVE
     
     print("all living cows are now in play")
