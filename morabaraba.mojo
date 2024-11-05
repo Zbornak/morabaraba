@@ -22,13 +22,13 @@ from mills import react_to_mill
 from move import move_player_cow
 
 def main():
-    var user_cows_remaining = 12
-    var user_cows_in_play = 0
-    var user_dead_cows = 0
+    var player1_cows_remaining = 12
+    var player1_cows_in_play = 0
+    var player1_dead_cows = 0
     
-    var impi_cows_remaining = 12
-    var impi_cows_in_play = 0
-    var impi_dead_cows = 0
+    var player2_cows_remaining = 12
+    var player2_in_play = 0
+    var player2_dead_cows = 0
     
     # All possible mills(20)
     var mill_12 = InlineArray[String, 3]("d5", "d6", "d7")
@@ -91,31 +91,31 @@ def main():
         print("error drawing board") 
     
     print("***PLACING PHASE***")
-    print("you control the dark cows (⑁⚇), Impi has the light cows (⑁⚉)")
-    print("you go first")
+    print("player one controls the dark cows (⑁⚇), player two has the light cows (⑁⚉)")
+    print("player one goes first")
                      
-    while user_cows_remaining > 0 and impi_cows_remaining > 0:
-        # START OF PLAYER MOVE      
-        user_move_choice = py_input("make your move: ")
-        choice = str(user_move_choice)
+    while player1_cows_remaining > 0 and player2_cows_remaining > 0:
+        # START OF PLAYER 1 MOVE      
+        py_player1_move_choice = py_input("player one make your move: ")
+        player1_move_choice = str(py_player1_move_choice)
         
-        # check to see if choice is valid and if you or impi aren't already on that spot
-        if choice in possible_moves and possible_moves[choice].ownership == "unowned":
+        # check to see if choice is valid and if you or player 2 aren't already on that spot
+        if player1_move_choice in possible_moves and possible_moves[player1_move_choice].ownership == "unowned":
             # change board position into a dark cow
-            possible_moves[choice].name = "⑁⚇"
+            possible_moves[player1_move_choice].name = "⑁⚇"
             
-            # change board status from unowned to player
-            possible_moves[choice].ownership = "player"
+            # change board status from unowned to player 1
+            possible_moves[player1_move_choice].ownership = "player1"
             
             try:
                 draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"])
             except:
                 print("error drawing board")
                 
-            user_cows_remaining -= 1
-            user_cows_in_play += 1
+            player1_cows_remaining -= 1
+            player1_cows_in_play += 1
             
-        elif choice == "rules":
+        elif player1_move_choice == "rules":
             print_rules()
             
             try:
@@ -125,109 +125,101 @@ def main():
                 
             continue
             
-        elif choice == "exit":
+        elif player1_move_choice == "exit":
             return 1
         
         else:
             print("invalid move, please try again") 
             continue
                    
-        print(String("you chose {}").format(choice))
-        print(String("{0} is now marked as owned by {1}").format(choice, possible_moves[choice].ownership))
-        print(String("you have {} cows remaining").format(user_cows_remaining))
+        print(String("player one chose {}").format(player1_move_choice))
+        print(String("{0} is now marked as owned by {1}").format(player1_move_choice, possible_moves[player1_move_choice].ownership))
+        print(String("player one has {} cows remaining").format(player1_move_choice))
         
         # test for a mill
         while True:
-            if not test_for_mill(choice, player_mill_list, possible_moves):
+            if not test_for_mill(player1_move_choice, mill_list, possible_moves):
                 break
     
             while True:
-                py_user_shot_choice = py_input("you have a mill, choose a cow to shoot: ")
-                user_shot_choice = str(py_user_shot_choice)
+                py_player1_shot_choice = py_input("you have a mill, choose a cow to shoot: ")
+                player1_shot_choice = str(py_player1_shot_choice)
                 
-                if react_to_mill(user_shot_choice, possible_moves, impi_dead_cows, impi_cows_in_play):
-                    print(String("{0} is now marked as {1}").format(user_shot_choice, possible_moves[user_shot_choice].ownership))
+                if react_to_mill("player1", "player2", player1_shot_choice, possible_moves, player2_dead_cows, player2_cows_in_play):
+                    print(String("{0} is now marked as {1}").format(player1_shot_choice, possible_moves[player1_shot_choice].ownership))
                     
                     # exit inner loop if a valid move is made
                     break  
                 
                 else:
-                    print("invalid move, remember you can only shoot Impi's cows which are not currently in a mill")
+                    print("invalid move, remember you can only shoot opponent's cows (not currently in a mill)")
     
             # valid move was made, break the outer loop
             break
-        # END OF PLAYER MOVE
+        # END OF PLAYER 1 MOVE
                 
-        # START OF IMPI MOVE
-        print("impi is considering its move...")
+        # START OF PLAYER 2 MOVE      
+        py_player2_move_choice = py_input("player two make your move: ")
+        player2_move_choice = str(py_player2_move_choice)
         
-        var impi_move_choice: String = ""
-        
-        while True:
-            # temporary impi 'ai' 
-            var chosen_letter: String = "a" 
-            var chosen_num: String = "1" 
+        # check to see if choice is valid and if you or player 1 aren't already on that spot
+        if player2_move_choice in possible_moves and possible_moves[player2_move_choice].ownership == "unowned":
+            # change board position into a dark cow
+            possible_moves[player2_move_choice].name = "⑁⚇"
             
-            var impi_choices = ["a1", "d1", "g1", "b2", "d2", "f2", "c3", "d3", "e3", "a4", "b4", "c4", "e4", "f4", "g4", "c5", "d5", "e5", "b6", "d6", "f6", "a7", "d7", "g7"]
-            
-            rnd = Python.import_module("random")
-            
-            chosen_location = str(rnd.choice(impi_choices))
-            
-            impi_move_choice = String("{}").format(chosen_location)
-            
-            # check to see if choice is valid and if you or impi aren't already on that spot
-            if possible_moves[impi_move_choice].ownership == "unowned":
-                # change board position into a light cow
-                possible_moves[impi_move_choice].name = "⑁⚉"
-                
-                # change board piece status from unowned to impi
-                possible_moves[impi_move_choice].ownership = "impi"
-            
-                impi_cows_remaining -= 1
-                impi_cows_in_play += 1
-                
-                try:
-                    draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"])
-                except:
-                    print("error drawing board")
-                    
-                break
-                
-            # test to see if counter is correct if impi chooses an invalid position   
-            # print("Impi has made the wrong move, choosing again...")   
-              
-        print(String("Impi chose {0}").format(impi_move_choice)) 
-        print(String("{0} is now marked as owned by {1}").format(impi_move_choice, possible_moves[impi_move_choice].ownership))
-        print(String("Impi has {} cows remaining").format(impi_cows_remaining))
-        
-        # test for a mill
-        if test_for_mill(impi_move_choice, impi_mill_list, possible_moves):
-            print("impi has a mill")
-            var impi_shot_choice: String = ""
-            
-            for item in possible_moves.items():
-                if item[].value.name == "⑁⚇":
-                    impi_shot_choice = item[].key
-                    possible_moves[impi_shot_choice].name = impi_shot_choice
-                    
-                    # change board piece status from player to unowned
-                    possible_moves[impi_shot_choice].ownership = "unowned"
-                    
-                    # stop impi from shooting all player cows after 1 mill
-                    break
-                    
-            print(String("Impi has shot your cow at position {}").format(impi_shot_choice))
-            print(String("{0} is now marked as {1}").format(impi_shot_choice, possible_moves[impi_shot_choice].ownership))
-            user_dead_cows += 1
-            user_cows_in_play -= 1
+            # change board status from unowned to player 2
+            possible_moves[player2_move_choice].ownership = "player2"
             
             try:
                 draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"])
             except:
-                print("error drawing board") 
+                print("error drawing board")
                 
-        # END OF IMPI MOVE
+            player2_cows_remaining -= 1
+            player2_cows_in_play += 1
+            
+        elif player2_move_choice == "rules":
+            print_rules()
+            
+            try:
+                draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"])
+            except:
+                print("error drawing board")
+                
+            continue
+            
+        elif player2_move_choice == "exit":
+            return 1
+        
+        else:
+            print("invalid move, please try again") 
+            continue
+                   
+        print(String("player two chose {}").format(player1_move_choice))
+        print(String("{0} is now marked as owned by {1}").format(player1_move_choice, possible_moves[player1_move_choice].ownership))
+        print(String("player 2 has {} cows remaining").format(player1_move_choice))
+        
+        # test for a mill
+        while True:
+            if not test_for_mill(player2_move_choice, mill_list, possible_moves):
+                break
+    
+            while True:
+                py_player2_shot_choice = py_input("you have a mill, choose a cow to shoot: ")
+                player2_shot_choice = str(py_player2_shot_choice)
+                
+                if react_to_mill("player2", "player1", player2_shot_choice, possible_moves, player1_dead_cows, player1_cows_in_play):
+                    print(String("{0} is now marked as {1}").format(player2_shot_choice, possible_moves[player2_shot_choice].ownership))
+                    
+                    # exit inner loop if a valid move is made
+                    break  
+                
+                else:
+                    print("invalid move, remember you can only shoot opponent's cows (not currently in a mill)")
+    
+            # valid move was made, break the outer loop
+            break
+        # END OF PLAYER 2 MOVE
     
     print("all living cows are now in play")
     print("")

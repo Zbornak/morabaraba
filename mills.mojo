@@ -24,15 +24,15 @@ from board_piece import Board_Piece
 #     
 #     return False
     
-def react_to_mill(inout choice: String, inout possible_moves: Dict[String, Board_Piece], inout dead_cows: Int, inout cows_in_play: Int) -> Bool:
+def react_to_mill(player: String, opponent: String, inout choice: String, inout possible_moves: Dict[String, Board_Piece], inout dead_cows: Int, inout cows_in_play: Int) -> Bool:
     if not possible_moves[choice].in_mill:
-        if choice in possible_moves and possible_moves[choice].ownership == "impi":
+        if choice in possible_moves and possible_moves[choice].ownership == player:
             possible_moves[choice].name = choice
             
             # change board piece status from impi to unowned
             possible_moves[choice].ownership = "unowned"
             
-            print(String("you have shot Impi's cow at position {}").format(choice))
+            print(String("you have shot {0}'s cow at position {1}").format(opponent, choice))
             dead_cows += 1
             cows_in_play -= 1
             
