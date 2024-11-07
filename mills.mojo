@@ -1,6 +1,7 @@
 from board_piece import Board_Piece
 from collections import List
 from collections import Dict
+from python import Python
 
 def check_for_mill(move: String, player: String, mill_list: List[List[String]], inout possible_moves: Dict[String, Board_Piece]) -> Bool:    
     var move_mill_list = List[List[String]]()
@@ -31,5 +32,10 @@ def check_for_mill(move: String, player: String, mill_list: List[List[String]], 
     
     return False
                 
-fn shoot_cow():
+def shoot_cow(player: String, inout possible_moves: Dict[String, Board_Piece]):
+    Python.add_to_path(".")
+    py_input = Python.import_module("builtins").input
+    py_shot_choice = py_input("choose a cow to shoot: ")
+    shot_choice = str(py_shot_choice)
+
     print("MOO")
