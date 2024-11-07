@@ -17,7 +17,6 @@ from board_piece import Board_Piece
 from board import draw_board
 from random import randint
 from move import move_cow
-from mills import Mill
 from mills import check_for_mill
 
 def main():
@@ -51,7 +50,7 @@ def main():
     var mill_CL = List(String("c3"), String("c4"), String("c5"))
     var mill_CR = List(String("e3"), String("e4"), String("e5"))
     
-    var mill_list = List(Mill(mill_12, 0), Mill(mill_1, 0), Mill(mill_3, 0), Mill(mill_5, 0), Mill(mill_6, 0), Mill(mill_7, 0), Mill(mill_9, 0), Mill(mill_11, 0), Mill(mill_TH, 0), Mill(mill_BH, 0), Mill(mill_VL, 0), Mill(mill_VR, 0), Mill(mill_MT, 0), Mill(mill_MB, 0), Mill(mill_ML, 0), Mill(mill_MR, 0), Mill(mill_CT, 0), Mill(mill_CB, 0), Mill(mill_CL, 0), Mill(mill_CR, 0))  
+    var mill_list = List(mill_12, mill_1, mill_3, mill_5, mill_6, mill_7, mill_9, mill_11, mill_TH, mill_BH, mill_VL, mill_VR, mill_MT, mill_MB, mill_ML, mill_MR, mill_CT, mill_CB, mill_CL, mill_CR)
     
     var possible_moves = Dict[String, Board_Piece]()
     possible_moves["a7"] = Board_Piece("a7", "unowned", False)
@@ -136,7 +135,7 @@ def main():
         print(String("player one has {} cows remaining").format(player1_cows_remaining))
         
         # test for a mill
-        if check_for_mill(player1_move_choice, mill_list, possible_moves):
+        if check_for_mill(player1_move_choice, "player1", mill_list, possible_moves):
             print("player one has a mill")
         # END OF PLAYER 1 MOVE
                 
@@ -182,7 +181,7 @@ def main():
         print(String("player two has {} cows remaining").format(player2_cows_remaining))
         
         # test for a mill
-        if check_for_mill(player2_move_choice, mill_list, possible_moves):
+        if check_for_mill(player2_move_choice, "player2", mill_list, possible_moves):
             print("player two has a mill")
         # END OF PLAYER 2 MOVE
     

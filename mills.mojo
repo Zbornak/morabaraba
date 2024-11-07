@@ -2,23 +2,25 @@ from board_piece import Board_Piece
 from collections import List
 from collections import Dict
 
-@value
-struct Mill:
-    var mill: List[String]
-    var counter: Int
-
-    fn __init__(inout self, owned mill: List[String], owned counter: Int):
-        self.mill = mill^
-        self.counter = counter
-        
-
-def check_for_mill(move: String, inout mill_list: List[Mill], inout possible_moves: Dict[String, Board_Piece]) -> Bool:    
-    for i in range(len(mill_list)):
-        if move in mill_list[i].mill:
-            mill_list[i].counter += 1
-            if mill_list[i].counter > 2:
+def check_for_mill(move: String, player: String, mill_list: List[List[String]], inout possible_moves: Dict[String, Board_Piece]) -> Bool:    
+    var move_mill_list = List[List[String]]()
+    
+    for mill in mill_list:
+        if move in mill[]:
+            move_mill_list.append(mill[])
+            
+    for found_mill in move_mill_list:
+        for i in found_mill[]:
+            if i == move and possible_moves[move].ownership == player:
                 possible_moves[move].in_mill = True
-                return True
+                
+        var pos0 = str(found_mill[][0])
+        var pos1 = str(found_mill[][1])
+        var pos2 = str(found_mill[][2])
+        
+        if possible_moves[pos0].in_mill and possible_moves[pos1].in_mill and possible_moves[pos2].in_mill:
+            return True
+
     return False
                 
 fn shoot_cow():
