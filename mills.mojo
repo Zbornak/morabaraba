@@ -18,6 +18,8 @@ def check_for_mill(move: String, player: String, mill_list: List[List[String]], 
         for i in found_mill[]:
             if possible_moves[i[]].ownership == player:
                 possible_moves[i[]].in_mill = True
+            else:
+                possible_moves[i[]].in_mill = False
         
         # check that all positions in mill are set to true
         pos0 = possible_moves[found_mill[][0]].in_mill
