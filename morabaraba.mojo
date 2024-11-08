@@ -139,6 +139,7 @@ def main():
         if check_for_mill(player1_move_choice, "player1", mill_list, possible_moves):
             print("player one has a mill")
             shoot_cow("player1", possible_moves)
+            _ = check_for_mill(player1_move_choice, "player1", mill_list, possible_moves)
         # END OF PLAYER 1 MOVE
                 
         # START OF PLAYER 2 MOVE      
@@ -186,6 +187,7 @@ def main():
         if check_for_mill(player2_move_choice, "player2", mill_list, possible_moves):
             print("player two has a mill")
             shoot_cow("player2", possible_moves)
+            _ = check_for_mill(player2_move_choice, "player2", mill_list, possible_moves)
         # END OF PLAYER 2 MOVE
     
     print("all living cows are now in play")
