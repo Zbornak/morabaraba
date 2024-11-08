@@ -7,31 +7,17 @@ from board import draw_board
 from sys import exit
 
 def check_for_mill(move: String, player: String, mill_list: List[List[String]], inout possible_moves: Dict[String, Board_Piece]) -> Bool:    
-    var move_mill_list = List[List[String]]()
-    var pos0: Bool = False
-    var pos1: Bool = False
-    var pos2: Bool = False
-    
-    # add all mill lists that contain the player's move
     for mill in mill_list:
         if move in mill[]:
-            move_mill_list.append(mill[])
-            
-    # toggle cows that are in a mill and controlled by player to true
-    for found_mill in move_mill_list:
-        for i in found_mill[]:
-            if possible_moves[i[]].ownership == player:
-                possible_moves[i[]].in_mill = True
+            if (possible_moves[mill[][0]].ownership == player and possible_moves[mill[][1]].ownership == player and possible_moves[mill[][2]].ownership == player):
+                possible_moves[mill[][0]].in_mill = True
+                possible_moves[mill[][1]].in_mill = True
+                possible_moves[mill[][2]].in_mill = True
+                return True
             else:
-                possible_moves[i[]].in_mill = False
-        
-        # check that all positions in mill are set to true
-        pos0 = possible_moves[found_mill[][0]].in_mill
-        pos1 = possible_moves[found_mill[][1]].in_mill
-        pos2 = possible_moves[found_mill[][2]].in_mill
-            
-        if pos0 and pos1 and pos2:
-            return True
+                possible_moves[mill[][0]].in_mill = False
+                possible_moves[mill[][1]].in_mill = False
+                possible_moves[mill[][2]].in_mill = False
     
     return False
                 
@@ -44,7 +30,8 @@ def shoot_cow(player: String, opponent: String, inout possible_moves: Dict[Strin
         shot_choice = str(py_shot_choice)
         
         if shot_choice in possible_moves:
-            if possible_moves[shot_choice].ownership == opponent:
+            if possible_moves[shot_choice].ownership == opponent and possible_moves[shot_choice].in_mill == False:
+                print(possible_moves[shot_choice].in_mill)
                 possible_moves[shot_choice].in_mill = False
                 possible_moves[shot_choice].name = shot_choice
                 possible_moves[shot_choice].ownership = "unowned"
