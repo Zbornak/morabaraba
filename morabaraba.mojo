@@ -134,12 +134,13 @@ def main():
         print(String("player one chose {}").format(player1_move_choice))
         # print(String("{0} is now marked as owned by {1}").format(player1_move_choice, possible_moves[player1_move_choice].ownership))
         print(String("player one has {} cows remaining").format(player1_cows_remaining))
+        print(String("player one has {} dead cow/s").format(player1_dead_cows))
         
         # test for a mill
         if check_for_mill(player1_move_choice, "player1", mill_list, possible_moves):
             print("player one has a mill")
-            shoot_cow("player1", possible_moves)
-            _ = check_for_mill(player1_move_choice, "player1", mill_list, possible_moves)
+            shoot_cow("player1", "player2", possible_moves)
+            player2_dead_cows += 1
         # END OF PLAYER 1 MOVE
                 
         # START OF PLAYER 2 MOVE      
@@ -179,15 +180,16 @@ def main():
             print("invalid move, please try again") 
             continue
                    
-        print(String("player two chose {}").format(player1_move_choice))
+        print(String("player two chose {}").format(player2_move_choice))
         # print(String("{0} is now marked as owned by {1}").format(player1_move_choice, possible_moves[player1_move_choice].ownership))
         print(String("player two has {} cows remaining").format(player2_cows_remaining))
+        print(String("player two has {} dead cow/s").format(player2_dead_cows))
         
         # test for a mill
         if check_for_mill(player2_move_choice, "player2", mill_list, possible_moves):
             print("player two has a mill")
-            shoot_cow("player2", possible_moves)
-            _ = check_for_mill(player2_move_choice, "player2", mill_list, possible_moves)
+            shoot_cow("player2", "player1", possible_moves)
+            player1_dead_cows += 1
         # END OF PLAYER 2 MOVE
     
     print("all living cows are now in play")
