@@ -132,7 +132,7 @@ def main():
             continue
                    
         print(String("player one chose {}").format(player1_move_choice))
-        print(String("{0} is now marked as owned by {1}").format(player1_move_choice, possible_moves[player1_move_choice].ownership))
+        # print(String("{0} is now marked as owned by {1}").format(player1_move_choice, possible_moves[player1_move_choice].ownership))
         print(String("player one has {} cows remaining").format(player1_cows_remaining))
         
         # test for a mill
@@ -179,7 +179,7 @@ def main():
             continue
                    
         print(String("player two chose {}").format(player1_move_choice))
-        print(String("{0} is now marked as owned by {1}").format(player1_move_choice, possible_moves[player1_move_choice].ownership))
+        # print(String("{0} is now marked as owned by {1}").format(player1_move_choice, possible_moves[player1_move_choice].ownership))
         print(String("player two has {} cows remaining").format(player2_cows_remaining))
         
         # test for a mill
