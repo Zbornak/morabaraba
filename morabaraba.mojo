@@ -194,7 +194,7 @@ def main():
     
     print("all living cows are now in play")
     print("")
-    print("***MOOVING PHASE***")
+    print("***MOVING PHASE***")
     
     print("to make a move, type 'current cow position' to 'new cow position' eg. f2 to g1")
     print("remember you can only move your cows to adjacent empty board positions")

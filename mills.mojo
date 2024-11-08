@@ -31,7 +31,6 @@ def shoot_cow(player: String, opponent: String, inout possible_moves: Dict[Strin
         
         if shot_choice in possible_moves:
             if possible_moves[shot_choice].ownership == opponent and possible_moves[shot_choice].in_mill == False:
-                print(possible_moves[shot_choice].in_mill)
                 possible_moves[shot_choice].in_mill = False
                 possible_moves[shot_choice].name = shot_choice
                 possible_moves[shot_choice].ownership = "unowned"
