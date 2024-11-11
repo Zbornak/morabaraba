@@ -199,6 +199,8 @@ def main():
     print("to make a move, type 'current cow position' to 'new cow position' eg. f2 to g1")
     print("remember you can only move your cows to adjacent empty board positions")
     
+    # PLAYER ONE MOVE
     move_cow("player1", "player2", possible_moves)
+    # END OF PLAYER ONE MOVE
 
     # end of program
