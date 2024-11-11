@@ -20,6 +20,18 @@ def check_for_mill(move: String, player: String, mill_list: List[List[String]], 
                 possible_moves[mill[][2]].in_mill = False
     
     return False
+    
+fn all_cows_in_mills(inout possible_moves: Dict[String, Board_Piece]) -> Bool:
+    var counter = 0
+
+    for item in possible_moves.items():
+        if item[].value.in_mill:
+            counter += 1
+        
+        if counter == 24:
+            return True
+    
+    return False
                 
 def shoot_cow(player: String, opponent: String, inout possible_moves: Dict[String, Board_Piece]):
     Python.add_to_path(".")
@@ -30,7 +42,7 @@ def shoot_cow(player: String, opponent: String, inout possible_moves: Dict[Strin
         shot_choice = str(py_shot_choice)
         
         if shot_choice in possible_moves:
-            if possible_moves[shot_choice].ownership == opponent and possible_moves[shot_choice].in_mill == False:
+            if possible_moves[shot_choice].ownership == opponent and possible_moves[shot_choice].in_mill == False or all_cows_in_mills(possible_moves):
                 possible_moves[shot_choice].in_mill = False
                 possible_moves[shot_choice].name = shot_choice
                 possible_moves[shot_choice].ownership = "unowned"
