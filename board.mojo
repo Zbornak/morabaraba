@@ -2,8 +2,6 @@ from board_piece import Board_Piece
 from collections import Dict
 
 fn draw_board(bp1: Board_Piece, bp2: Board_Piece, bp3: Board_Piece, bp4: Board_Piece, bp5: Board_Piece, bp6: Board_Piece, bp7: Board_Piece, bp8: Board_Piece, bp9: Board_Piece, bp10: Board_Piece, bp11: Board_Piece, bp12: Board_Piece, bp13: Board_Piece, bp14: Board_Piece, bp15: Board_Piece, bp16: Board_Piece, bp17: Board_Piece, bp18: Board_Piece, bp19: Board_Piece, bp20: Board_Piece, bp21: Board_Piece, bp22: Board_Piece, bp23: Board_Piece, bp24: Board_Piece, possible_moves: Dict[String, Board_Piece]) raises:
-    var cyan = "\033[96m"
-    var reset = "\033[0m"
     
     print(String("""
     {2}---------------{14}---------------{23}
