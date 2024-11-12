@@ -54,30 +54,30 @@ def main():
     var mill_list = List(mill_12, mill_1, mill_3, mill_5, mill_6, mill_7, mill_9, mill_11, mill_TH, mill_BH, mill_VL, mill_VR, mill_MT, mill_MB, mill_ML, mill_MR, mill_CT, mill_CB, mill_CL, mill_CR)
     
     var possible_moves = Dict[String, Board_Piece]()
-    possible_moves["a7"] = Board_Piece("a7", "unowned", False)
-    possible_moves["d7"] = Board_Piece("d7", "unowned", False)
-    possible_moves["g7"] = Board_Piece("g7", "unowned", False)
-    possible_moves["b6"] = Board_Piece("b6", "unowned", False)
-    possible_moves["d6"] = Board_Piece("d6", "unowned", False)
-    possible_moves["f6"] = Board_Piece("f6", "unowned", False)
-    possible_moves["c5"] = Board_Piece("c5", "unowned", False)
-    possible_moves["d5"] = Board_Piece("d5", "unowned", False)
-    possible_moves["e5"] = Board_Piece("e5", "unowned", False)
-    possible_moves["a4"] = Board_Piece("a4", "unowned", False)
-    possible_moves["b4"] = Board_Piece("b4", "unowned", False)
-    possible_moves["c4"] = Board_Piece("c4", "unowned", False)
-    possible_moves["e4"] = Board_Piece("e4", "unowned", False)
-    possible_moves["f4"] = Board_Piece("f4", "unowned", False)
-    possible_moves["g4"] = Board_Piece("g4", "unowned", False)
-    possible_moves["c3"] = Board_Piece("c3", "unowned", False)
-    possible_moves["d3"] = Board_Piece("d3", "unowned", False)
-    possible_moves["e3"] = Board_Piece("e3", "unowned", False)
-    possible_moves["b2"] = Board_Piece("b2", "unowned", False)
-    possible_moves["d2"] = Board_Piece("d2", "unowned", False)
-    possible_moves["f2"] = Board_Piece("f2", "unowned", False)
-    possible_moves["a1"] = Board_Piece("a1", "unowned", False)
-    possible_moves["d1"] = Board_Piece("d1", "unowned", False)
-    possible_moves["g1"] = Board_Piece("g1", "unowned", False)
+    possible_moves["a7"] = Board_Piece("a7", "unowned", False, False)
+    possible_moves["d7"] = Board_Piece("d7", "unowned", False, False)
+    possible_moves["g7"] = Board_Piece("g7", "unowned", False, False)
+    possible_moves["b6"] = Board_Piece("b6", "unowned", False, False)
+    possible_moves["d6"] = Board_Piece("d6", "unowned", False, False)
+    possible_moves["f6"] = Board_Piece("f6", "unowned", False, False)
+    possible_moves["c5"] = Board_Piece("c5", "unowned", False, False)
+    possible_moves["d5"] = Board_Piece("d5", "unowned", False, False)
+    possible_moves["e5"] = Board_Piece("e5", "unowned", False, False)
+    possible_moves["a4"] = Board_Piece("a4", "unowned", False, False)
+    possible_moves["b4"] = Board_Piece("b4", "unowned", False, False)
+    possible_moves["c4"] = Board_Piece("c4", "unowned", False, False)
+    possible_moves["e4"] = Board_Piece("e4", "unowned", False, False)
+    possible_moves["f4"] = Board_Piece("f4", "unowned", False, False)
+    possible_moves["g4"] = Board_Piece("g4", "unowned", False, False)
+    possible_moves["c3"] = Board_Piece("c3", "unowned", False, False)
+    possible_moves["d3"] = Board_Piece("d3", "unowned", False, False)
+    possible_moves["e3"] = Board_Piece("e3", "unowned", False, False)
+    possible_moves["b2"] = Board_Piece("b2", "unowned", False, False)
+    possible_moves["d2"] = Board_Piece("d2", "unowned", False, False)
+    possible_moves["f2"] = Board_Piece("f2", "unowned", False, False)
+    possible_moves["a1"] = Board_Piece("a1", "unowned", False, False)
+    possible_moves["d1"] = Board_Piece("d1", "unowned", False, False)
+    possible_moves["g1"] = Board_Piece("g1", "unowned", False, False)
     
     print_intro()
     
@@ -105,6 +105,9 @@ def main():
             
             # change board status from unowned to player 1
             possible_moves[player1_move_choice].ownership = "player1"
+            
+            # change board piece to in play
+            possible_moves[player1_move_choice].in_play = True
             
             try:
                 draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
@@ -160,6 +163,9 @@ def main():
             
             # change board status from unowned to player 2
             possible_moves[player2_move_choice].ownership = "player2"
+            
+            # change board piece to in play
+            possible_moves[player2_move_choice].in_play = True
             
             try:
                 draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
