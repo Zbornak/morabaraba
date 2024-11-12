@@ -6,15 +6,15 @@ from rules import print_rules
 from board import draw_board
 from sys import exit
 
-def check_for_mill(move: String, player: String, mill_list: List[List[String]], inout possible_moves: Dict[String, Board_Piece]) -> Bool:    
+def check_for_mill(move: String, player: String, opponent: String, mill_list: List[List[String]], inout possible_moves: Dict[String, Board_Piece]) -> Bool:    
     for mill in mill_list:
         if move in mill[]:
-            if (possible_moves[mill[][0]].ownership == player and possible_moves[mill[][1]].ownership == player and possible_moves[mill[][2]].ownership == player):
+            if possible_moves[mill[][0]].ownership == player and possible_moves[mill[][1]].ownership == player and possible_moves[mill[][2]].ownership == player:
                 possible_moves[mill[][0]].in_mill = True
                 possible_moves[mill[][1]].in_mill = True
                 possible_moves[mill[][2]].in_mill = True
                 return True
-            else:
+            elif possible_moves[mill[][0]].ownership == opponent and possible_moves[mill[][1]].ownership == opponent and possible_moves[mill[][2]].ownership == opponent:
                 possible_moves[mill[][0]].in_mill = False
                 possible_moves[mill[][1]].in_mill = False
                 possible_moves[mill[][2]].in_mill = False

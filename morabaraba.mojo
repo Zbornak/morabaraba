@@ -137,7 +137,7 @@ def main():
         print(String("player one has {} dead cow/s").format(player1_dead_cows))
         
         # test for a mill
-        if check_for_mill(player1_move_choice, "player1", mill_list, possible_moves):
+        if check_for_mill(player1_move_choice, "player1", "player2", mill_list, possible_moves):
             try:
                 draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
             except:
@@ -191,7 +191,7 @@ def main():
         print(String("player two has {} dead cow/s").format(player2_dead_cows))
         
         # test for a mill
-        if check_for_mill(player2_move_choice, "player2", mill_list, possible_moves):
+        if check_for_mill(player2_move_choice, "player2", "player1", mill_list, possible_moves):
             try:
                 draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
             except:
