@@ -8,7 +8,7 @@ from sys import exit
 
 fn all_in_mill(inout board_pieces: Dict[String, Board_Piece]) -> Bool:
     for board_piece in board_pieces.values():
-        if not board_piece[].in_mill:
+        if board_piece[].in_play and not board_piece[].in_mill:
             return False
     
     return True
