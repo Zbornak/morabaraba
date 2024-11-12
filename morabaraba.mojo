@@ -146,6 +146,7 @@ def main():
             print("player one has a mill")
             shoot_cow("player1", "player2", possible_moves)
             player2_dead_cows += 1
+            player2_cows_in_play -= 1
         # END OF PLAYER 1 MOVE
                 
         # START OF PLAYER 2 MOVE      
@@ -186,7 +187,6 @@ def main():
             continue
                    
         print(String("player two chose {}").format(player2_move_choice))
-        # print(String("{0} is now marked as owned by {1}").format(player1_move_choice, possible_moves[player1_move_choice].ownership))
         print(String("player two has {} cows remaining").format(player2_cows_remaining))
         print(String("player two has {} dead cow/s").format(player2_dead_cows))
         
@@ -200,6 +200,7 @@ def main():
             print("player two has a mill")
             shoot_cow("player2", "player1", possible_moves)
             player1_dead_cows += 1
+            player1_cows_in_play -= 1
         # END OF PLAYER 2 MOVE
     
     print("all living cows are now in play")

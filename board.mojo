@@ -1,6 +1,7 @@
 from board_piece import Board_Piece
 from collections import Dict
 
+# change color depending on if cow is in a mill or not
 fn set_color(no_mill_color: String, mill_color: String, piece: Board_Piece) -> String:
     if piece.in_mill:
         return mill_color
