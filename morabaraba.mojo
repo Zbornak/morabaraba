@@ -217,7 +217,7 @@ def main():
     print("remember you can only move your cows to adjacent empty board positions")
     
     # START OF MOVING PHASE
-    while player1_dead_cows < 10 or player2_dead_cows < 10:
+    while player1_dead_cows < 9 or player2_dead_cows < 9:
         var move_to: String = ""
         # PLAYER ONE MOVE
         move_to = move_cow("player1", "player2", possible_moves)
@@ -253,9 +253,9 @@ def main():
     # START OF FLYING PHASE
     print("a player has only three cows remaining")
     print("***FLYING PHASE***")
-    if player1_dead_cows > 10:
+    if player1_dead_cows > 9:
         print("player one your cows can now fly to any free space")
-    elif player2_dead_cows > 10:
+    elif player2_dead_cows > 9:
         print("player two your cows can now fly to any free space")
     # END OF FLYING PHASE
 
