@@ -37,9 +37,10 @@ def shoot_cow(player: String, opponent: String, inout possible_moves: Dict[Strin
         shot_choice = str(py_shot_choice)
         
         if shot_choice in possible_moves:
-            if possible_moves[shot_choice].ownership == opponent and possible_moves[shot_choice].in_mill == False:
+            if possible_moves[shot_choice].ownership == opponent and (possible_moves[shot_choice].in_mill == False or all_in_mill(possible_moves)):
                 possible_moves[shot_choice].name = shot_choice
                 possible_moves[shot_choice].ownership = "unowned"
+                possible_moves[shot_choice].in_mill = False
                 # change board piece to no longer in play
                 possible_moves[shot_choice].in_play = False
                 
