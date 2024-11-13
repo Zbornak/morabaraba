@@ -217,9 +217,37 @@ def main():
     print("remember you can only move your cows to adjacent empty board positions")
     
     # START OF MOVING PHASE
-    # PLAYER ONE MOVE
-    move_cow("player1", "player2", possible_moves)
-    # END OF PLAYER ONE MOVE
+    while player1_dead_cows < 10 and player2_dead_cows < 10:
+        var move_to: String = ""
+        # PLAYER ONE MOVE
+        move_to = move_cow("player1", "player2", possible_moves)
+        # test for a mill
+        if check_for_mill(move_to, "player1", "player2", mill_list, possible_moves):
+            try:
+                draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
+            except:
+                print("error drawing board")
+                
+            print("player one has a mill")
+            shoot_cow("player1", "player2", possible_moves)
+            player2_dead_cows += 1
+            player2_cows_in_play -= 1
+        # END OF PLAYER ONE MOVE
+        
+        # PLAYER TWO MOVE
+        move_to = move_cow("player2", "player1", possible_moves)
+        # test for a mill
+        if check_for_mill(move_to, "player2", "player1", mill_list, possible_moves):
+            try:
+                draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
+            except:
+                print("error drawing board")
+                
+            print("player two has a mill")
+            shoot_cow("player2", "player1", possible_moves)
+            player2_dead_cows += 1
+            player2_cows_in_play -= 1
+        # END OF PLAYER TWO MOVE
     # END OF MOVING PHASE
 
     # end of program

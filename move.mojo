@@ -6,20 +6,20 @@ from mills import check_for_mill
 from rules import print_rules
 from sys import exit
 
-def move_cow(player: String, opponent: String, inout possible_moves: Dict[String, Board_Piece]):
+def move_cow(player: String, opponent: String, inout possible_moves: Dict[String, Board_Piece]) -> String:
     Python.add_to_path(".")
     py_input = Python.import_module("builtins").input
     
     var name = "player one" if player == "player1" else "player two"
+    
+    var move_from: String = ""
+    var move_to: String = ""
 	
     while True:
         py_move_choice = py_input(String("{} make your move: ").format(name))
         move_choice = str(py_move_choice)
         
-        var move_from: String = ""
-        var move_to: String = ""
-        
-        # chick if player inputed a string of length 3 and the middle word is 'to'
+        # check if player inputed a string of length 3 and the middle word is 'to'
         words = move_choice.split(" ")    
         if len(words) == 3 and words[1] == "to":
             move_from = words[0]
@@ -60,6 +60,6 @@ def move_cow(player: String, opponent: String, inout possible_moves: Dict[String
         else:
             print("please use structure: 'current position' to 'new position', eg. f2 to g1")
 
-    return 0
+    return move_to
             
         
