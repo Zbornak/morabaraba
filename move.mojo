@@ -34,6 +34,7 @@ def move_cow(player: String, opponent: String, inout possible_moves: Dict[String
                 possible_moves[move_from].name = move_from
                 # change board piece to no longer in play
                 possible_moves[move_from].in_play = False
+                possible_moves[move_from].in_mill = False
                 
                 possible_moves[move_to].ownership = player
                 possible_moves[move_to].name = "⑁⚇" if player == "player1" else "⑁⚉"
