@@ -6,117 +6,151 @@ from mills import check_for_mill
 from rules import print_rules
 from sys import exit
 
-def allowed_adjacent_moves(position: Board_Piece, inout possible_moves: Dict[String, Board_Piece]) -> List[Board_Piece]:
-    var allowed_moves_list = List[Board_Piece]()
+def allowed_adjacent_moves(position: String) -> List[String]:
+    var allowed_moves_list = List[String]()
     
-    if position.name == "a7":
-        allowed_moves_list.append(possible_moves["d7"])
-        allowed_moves_list.append(possible_moves["b6"])
-        allowed_moves_list.append(possible_moves["a4"])
-    elif position.name == "a4":
-        allowed_moves_list.append(possible_moves["a7"])
-        allowed_moves_list.append(possible_moves["b4"])
-        allowed_moves_list.append(possible_moves["a1"])
-    elif position.name == "a1":
-        allowed_moves_list.append(possible_moves["a4"])
-        allowed_moves_list.append(possible_moves["b2"])
-        allowed_moves_list.append(possible_moves["d1"])
-    elif position.name == "b6":
-        allowed_moves_list.append(possible_moves["a7"])
-        allowed_moves_list.append(possible_moves["d6"])
-        allowed_moves_list.append(possible_moves["c5"])
-        allowed_moves_list.append(possible_moves["b4"])
-    elif position.name == "b4":
-        allowed_moves_list.append(possible_moves["a4"])
-        allowed_moves_list.append(possible_moves["b6"])
-        allowed_moves_list.append(possible_moves["b2"])
-        allowed_moves_list.append(possible_moves["c4"])
-    elif position.name == "b2":
-        allowed_moves_list.append(possible_moves["a1"])
-        allowed_moves_list.append(possible_moves["b4"])
-        allowed_moves_list.append(possible_moves["d2"])
-        allowed_moves_list.append(possible_moves["c3"])
-    elif position.name == "c5":
-        allowed_moves_list.append(possible_moves["b6"])
-        allowed_moves_list.append(possible_moves["d5"])
-        allowed_moves_list.append(possible_moves["c4"])
-    elif position.name == "c4":
-        allowed_moves_list.append(possible_moves["b4"])
-        allowed_moves_list.append(possible_moves["c5"])
-        allowed_moves_list.append(possible_moves["c3"])
-    elif position.name == "c3":
-        allowed_moves_list.append(possible_moves["b2"])
-        allowed_moves_list.append(possible_moves["c4"])
-        allowed_moves_list.append(possible_moves["d3"])
-    elif position.name == "d7":
-        allowed_moves_list.append(possible_moves["a7"])
-        allowed_moves_list.append(possible_moves["d6"])
-        allowed_moves_list.append(possible_moves["g7"])
-    elif position.name == "d6":
-        allowed_moves_list.append(possible_moves["d7"])
-        allowed_moves_list.append(possible_moves["b6"])
-        allowed_moves_list.append(possible_moves["d5"])
-        allowed_moves_list.append(possible_moves["f6"])
-    elif position.name == "d5":
-        allowed_moves_list.append(possible_moves["d6"])
-        allowed_moves_list.append(possible_moves["c5"])
-        allowed_moves_list.append(possible_moves["e5"])
-    elif position.name == "d3":
-        allowed_moves_list.append(possible_moves["c3"])
-        allowed_moves_list.append(possible_moves["e3"])
-        allowed_moves_list.append(possible_moves["d2"])
-    elif position.name == "d2":
-        allowed_moves_list.append(possible_moves["d3"])
-        allowed_moves_list.append(possible_moves["b2"])
-        allowed_moves_list.append(possible_moves["f2"])
-        allowed_moves_list.append(possible_moves["d1"])
-    elif position.name == "d1":
-        allowed_moves_list.append(possible_moves["a1"])
-        allowed_moves_list.append(possible_moves["d2"])
-        allowed_moves_list.append(possible_moves["g1"])
-    elif position.name == "e5":
-        allowed_moves_list.append(possible_moves["d5"])
-        allowed_moves_list.append(possible_moves["f6"])
-        allowed_moves_list.append(possible_moves["e4"])
-    elif position.name == "e4":
-        allowed_moves_list.append(possible_moves["e5"])
-        allowed_moves_list.append(possible_moves["f4"])
-        allowed_moves_list.append(possible_moves["e3"])
-    elif position.name == "e3":
-        allowed_moves_list.append(possible_moves["e4"])
-        allowed_moves_list.append(possible_moves["d3"])
-        allowed_moves_list.append(possible_moves["f2"])
-    elif position.name == "f6":
-        allowed_moves_list.append(possible_moves["g7"])
-        allowed_moves_list.append(possible_moves["d6"])
-        allowed_moves_list.append(possible_moves["e5"])
-        allowed_moves_list.append(possible_moves["f4"])
-    elif position.name == "f4":
-        allowed_moves_list.append(possible_moves["f6"])
-        allowed_moves_list.append(possible_moves["e4"])
-        allowed_moves_list.append(possible_moves["f2"])
-        allowed_moves_list.append(possible_moves["g4"])
-    elif position.name == "f2":
-        allowed_moves_list.append(possible_moves["e3"])
-        allowed_moves_list.append(possible_moves["f4"])
-        allowed_moves_list.append(possible_moves["g1"])
-        allowed_moves_list.append(possible_moves["d2"])
-    elif position.name == "g7":
-        allowed_moves_list.append(possible_moves["d7"])
-        allowed_moves_list.append(possible_moves["f6"])
-        allowed_moves_list.append(possible_moves["g4"])
-    elif position.name == "g4":
-        allowed_moves_list.append(possible_moves["g7"])
-        allowed_moves_list.append(possible_moves["f4"])
-        allowed_moves_list.append(possible_moves["g1"])
-    elif position.name == "g1":
-        allowed_moves_list.append(possible_moves["d1"])
-        allowed_moves_list.append(possible_moves["f2"])
-        allowed_moves_list.append(possible_moves["g4"])
+    if position == "a7":
+        allowed_moves_list.append("d7")
+        allowed_moves_list.append("b6")
+        allowed_moves_list.append("a4")
+    elif position == "a4":
+        allowed_moves_list.append("a7")
+        allowed_moves_list.append("b4")
+        allowed_moves_list.append("a1")
+    elif position == "a1":
+        allowed_moves_list.append("a4")
+        allowed_moves_list.append("b2")
+        allowed_moves_list.append("d1")
+    elif position == "b6":
+        allowed_moves_list.append("a7")
+        allowed_moves_list.append("d6")
+        allowed_moves_list.append("c5")
+        allowed_moves_list.append("b4")
+    elif position == "b4":
+        allowed_moves_list.append("a4")
+        allowed_moves_list.append("b6")
+        allowed_moves_list.append("b2")
+        allowed_moves_list.append("c4")
+    elif position == "b2":
+        allowed_moves_list.append("a1")
+        allowed_moves_list.append("b4")
+        allowed_moves_list.append("d2")
+        allowed_moves_list.append("c3")
+    elif position == "c5":
+        allowed_moves_list.append("b6")
+        allowed_moves_list.append("d5")
+        allowed_moves_list.append("c4")
+    elif position == "c4":
+        allowed_moves_list.append("b4")
+        allowed_moves_list.append("c5")
+        allowed_moves_list.append("c3")
+    elif position == "c3":
+        allowed_moves_list.append("b2")
+        allowed_moves_list.append("c4")
+        allowed_moves_list.append("d3")
+    elif position == "d7":
+        allowed_moves_list.append("a7")
+        allowed_moves_list.append("d6")
+        allowed_moves_list.append("g7")
+    elif position == "d6":
+        allowed_moves_list.append("d7")
+        allowed_moves_list.append("b6")
+        allowed_moves_list.append("d5")
+        allowed_moves_list.append("f6")
+    elif position == "d5":
+        allowed_moves_list.append("d6")
+        allowed_moves_list.append("c5")
+        allowed_moves_list.append("e5")
+    elif position == "d3":
+        allowed_moves_list.append("c3")
+        allowed_moves_list.append("e3")
+        allowed_moves_list.append("d2")
+    elif position == "d2":
+        allowed_moves_list.append("d3")
+        allowed_moves_list.append("b2")
+        allowed_moves_list.append("f2")
+        allowed_moves_list.append("d1")
+    elif position == "d1":
+        allowed_moves_list.append("a1")
+        allowed_moves_list.append("d2")
+        allowed_moves_list.append("g1")
+    elif position == "e5":
+        allowed_moves_list.append("d5")
+        allowed_moves_list.append("f6")
+        allowed_moves_list.append("e4")
+    elif position == "e4":
+        allowed_moves_list.append("e5")
+        allowed_moves_list.append("f4")
+        allowed_moves_list.append("e3")
+    elif position == "e3":
+        allowed_moves_list.append("e4")
+        allowed_moves_list.append("d3")
+        allowed_moves_list.append("f2")
+    elif position == "f6":
+        allowed_moves_list.append("g7")
+        allowed_moves_list.append("d6")
+        allowed_moves_list.append("e5")
+        allowed_moves_list.append("f4")
+    elif position == "f4":
+        allowed_moves_list.append("f6")
+        allowed_moves_list.append("e4")
+        allowed_moves_list.append("f2")
+        allowed_moves_list.append("g4")
+    elif position == "f2":
+        allowed_moves_list.append("e3")
+        allowed_moves_list.append("f4")
+        allowed_moves_list.append("g1")
+        allowed_moves_list.append("d2")
+    elif position == "g7":
+        allowed_moves_list.append("d7")
+        allowed_moves_list.append("f6")
+        allowed_moves_list.append("g4")
+    elif position == "g4":
+        allowed_moves_list.append("g7")
+        allowed_moves_list.append("f4")
+        allowed_moves_list.append("g1")
+    elif position == "g1":
+        allowed_moves_list.append("d1")
+        allowed_moves_list.append("f2")
+        allowed_moves_list.append("g4")
         
     return allowed_moves_list
     
-def check_move(chosen move: String, allowed_moves: List[Board_Piece]) -> Bool:
+def allowed_adjacent_moves(position: String) -> List[String]:
+    adjacent_moves = {
+        "a7": ["d7", "b6", "a4"],
+        "a4": ["a7", "b4", "a1"],
+        "a1": ["a4", "b2", "d1"],
+        "b6": ["a7", "d6", "c5", "b4"],
+        "b4": ["a4", "b6", "b2", "c4"],
+        "b2": ["a1", "b4", "d2", "c3"],
+        "c5": ["b6", "d5", "c4"],
+        "c4": ["b4", "c5", "c3"],
+        "c3": ["b2", "c4", "d3"],
+        "d7": ["a7", "d6", "g7"],
+        "d6": ["d7", "b6", "a4"],
+        "d5": ["a7", "b4", "a1"],
+        "d3": ["a4", "b2", "d1"],
+        "d2": ["a7", "d6", "c5", "b4"],
+        "d1": ["a4", "b6", "b2", "c4"],
+        "e5": ["a1", "b4", "d2", "c3"],
+        "e4": ["b6", "d5", "c4"],
+        "e3": ["b4", "c5", "c3"],
+        "f6": ["b2", "c4", "d3"],
+        "f4": ["a7", "d6", "g7"],
+        "f2": ["a1", "b4", "d2", "c3"],
+        "g7": ["b6", "d5", "c4"],
+        "g4": ["b4", "c5", "c3"],
+        "g1": ["b2", "c4", "d3"]
+    }
+    
+    return List[String](adjacent_moves.get(position, []))
+    
+def check_move(chosen_move: String) -> Bool:
+    var allowed_moves = allowed_adjacent_moves(chosen_move)
+    if chosen_move in allowed_moves:
+        return True
+
     return False
     
 
