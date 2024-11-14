@@ -116,6 +116,9 @@ def allowed_adjacent_moves(position: Board_Piece, inout possible_moves: Dict[Str
         
     return allowed_moves_list
     
+def check_move(chosen move: String, allowed_moves: List[Board_Piece]) -> Bool:
+    return False
+    
 
 def move_cow(player: String, opponent: String, inout possible_moves: Dict[String, Board_Piece]) -> String:
     Python.add_to_path(".")
@@ -140,46 +143,39 @@ def move_cow(player: String, opponent: String, inout possible_moves: Dict[String
         
         # check if player input is valid
         if move_from in possible_moves and move_to in possible_moves:
-            # only allow player to move cows to adjacent spots:
-            var allowed_moves = allowed_adjacent_moves(possible_moves[move_from], possible_moves)
-            
             if possible_moves[move_from].ownership == player and possible_moves[move_to].ownership == "unowned":
-                for allowed_move in allowed_moves:
-                    if possible_moves[move_to].name == allowed_move[].name:
-                        possible_moves[move_from].ownership = "unowned"
-                        possible_moves[move_from].name = move_from
-                        # change board piece to no longer in play
-                        possible_moves[move_from].in_play = False
-                        possible_moves[move_from].in_mill = False
-                        
-                        possible_moves[move_to].ownership = player
-                        possible_moves[move_to].name = "⑁⚇" if player == "player1" else "⑁⚉"
-                        # change board piece to in play
-                        possible_moves[move_to].in_play = True
-                        
-                        try:
-                            draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
-                        except:
-                            print("error drawing board")
-                            
-                        print(String("{} has moved their cow from {} to {}").format(name, move_from, move_to))
-                        break  
-                    else:
-                        print("please use structure: 'current position' to 'new position', eg. f2 to g1")
-                else:
-                    print("please use structure: 'current position' to 'new position', eg. f2 to g1")
-                    
-            elif move_choice == "rules":
-                print_rules()
+                possible_moves[move_from].ownership = "unowned"
+                possible_moves[move_from].name = move_from
+                # change board piece to no longer in play
+                possible_moves[move_from].in_play = False
+                possible_moves[move_from].in_mill = False
+                
+                possible_moves[move_to].ownership = player
+                possible_moves[move_to].name = "⑁⚇" if player == "player1" else "⑁⚉"
+                # change board piece to in play
+                possible_moves[move_to].in_play = True
+                
                 try:
                     draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
                 except:
                     print("error drawing board")
-            elif move_choice == "exit":
-                exit()
-            else:
-                print("please use structure: 'current position' to 'new position', eg. f2 to g1")
+                    
+                print(String("{} has moved their cow from {} to {}").format(name, move_from, move_to))
+                break  
+             else:
+                print("not an allowed move")       
+                
+        elif move_choice == "rules":
+            print_rules()
+            try:
+                draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
+            except:
+                print("error drawing board")
+        elif move_choice == "exit":
+            exit()
+        else:
+            print("please use structure: 'current position' to 'new position', eg. f2 to g1")
     
-        return move_to
+    return move_to
             
         
