@@ -81,7 +81,6 @@ def main():
     possible_moves["g1"] = Board_Piece("g1", "unowned", False, False)
     
     print_intro()
-    print("sawubona")
     
     Python.add_to_path(".")
     py_input = Python.import_module("builtins").input
@@ -91,6 +90,7 @@ def main():
     except:
         print("error drawing board") 
     
+    print("sawubona, izilokotho ezinhle!")
     print("***PLACING PHASE***")
     print("player one controls the dark cows (⑁⚇), player two has the light cows (⑁⚉)")
     print("player one goes first")
