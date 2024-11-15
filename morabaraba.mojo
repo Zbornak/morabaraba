@@ -95,7 +95,7 @@ def main():
     print("player one controls the dark cows (⑁⚇), player two has the light cows (⑁⚉)")
     print("player one goes first")
                      
-    while player1_cows_remaining > 0 and player2_cows_remaining > 0: # 9 for testing
+    while player1_cows_remaining > 4 and player2_cows_remaining > 4: # 4 for testing, 0 in production
         # START OF PLAYER 1 MOVE      
         py_player1_move_choice = py_input("player one make your move: ")
         player1_move_choice = str(py_player1_move_choice)
