@@ -259,6 +259,8 @@ def main():
     
     print("a player has only three cows remaining")
     print("***FLYING PHASE***")
+    
+    # check to see who can fly
     if player1_dead_cows > 9:
         print("player one your cows can now fly to any free space")
     elif player2_dead_cows > 9:
@@ -282,6 +284,10 @@ def main():
             player1_move_count -= 1
         # END OF PLAYER ONE MOVE
         
+        # check to see who can fly
+        if player1_dead_cows > 9 and player2_dead_cows > 9:
+            print("both players' cows can now fly")
+        
         # PLAYER TWO MOVE
         fly_to = move_cow("player2", "player1", possible_moves) if player2_dead_cows < 9 else fly_cow("player2", "player1", possible_moves)
         player2_move_count += 1
@@ -298,6 +304,10 @@ def main():
             player2_cows_in_play -= 1
             player2_move_count -= 1
         # END OF PLAYER TWO MOVE
+        
+        # check to see who can fly
+        if player1_dead_cows > 9 and player2_dead_cows > 9:
+            print("both players' cows can now fly")
     # END OF FLYING PHASE
     
     if player1_dead_cows == 10:
