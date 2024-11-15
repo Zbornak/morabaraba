@@ -35,10 +35,8 @@ def allowed_adjacent_moves(move_from: String) -> List[String]:
     adjacent_moves["g1"] = List[String]("d1", "f2", "g4")
     
     if move_from in adjacent_moves:
-        print("stuff here")
         return adjacent_moves[move_from]
     else:
-        print(String("no stuff here! Move from is {}").format(move_from))
         return List[String]()
     
 def check_move(move_from: String, move_to: String) -> Bool:
@@ -70,7 +68,7 @@ def move_cow(player: String, opponent: String, inout possible_moves: Dict[String
         
         # check if player input is valid
         if move_from in possible_moves and move_to in possible_moves:
-            if possible_moves[move_from].ownership == player and possible_moves[move_to].ownership == "unowned": #and check_move(possible_moves[move_from].name, possible_moves[move_to].name):
+            if possible_moves[move_from].ownership == player and possible_moves[move_to].ownership == "unowned" and check_move(move_from, move_to):
                 possible_moves[move_from].ownership = "unowned"
                 possible_moves[move_from].name = move_from
                 # change board piece to no longer in play
