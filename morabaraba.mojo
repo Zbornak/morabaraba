@@ -17,6 +17,7 @@ from board_piece import Board_Piece
 from board import draw_board
 from random import randint
 from move import move_cow
+from fly import fly_cow
 from mills import check_for_mill
 from mills import shoot_cow
 
@@ -80,6 +81,7 @@ def main():
     possible_moves["g1"] = Board_Piece("g1", "unowned", False, False)
     
     print_intro()
+    print("sawubona")
     
     Python.add_to_path(".")
     py_input = Python.import_module("builtins").input
@@ -251,12 +253,65 @@ def main():
     # END OF MOVING PHASE
     
     # START OF FLYING PHASE
+    # variables to keep track of move count (if a player doesn't shoot a cow within 10 moves it is a draw)
+    var player1_move_count = 0
+    var player2_move_count = 0
+    
     print("a player has only three cows remaining")
     print("***FLYING PHASE***")
     if player1_dead_cows > 9:
         print("player one your cows can now fly to any free space")
     elif player2_dead_cows > 9:
         print("player two your cows can now fly to any free space")
+        
+    while player1_dead_cows < 10 or player2_dead_cows < 10:
+        # PLAYER ONE MOVE
+        fly_to = move_cow("player1", "player2", possible_moves) if player1_dead_cows < 9 else fly_cow("player1", "player2", possible_moves)
+        player1_move_count += 1
+        # test for a mill
+        if check_for_mill(fly_to, "player1", "player2", mill_list, possible_moves):
+            try:
+                draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
+            except:
+                print("error drawing board")
+                
+            print("player one has a mill")
+            shoot_cow("player1", "player2", possible_moves)
+            player2_dead_cows += 1
+            player2_cows_in_play -= 1
+            player1_move_count -= 1
+        # END OF PLAYER ONE MOVE
+        
+        # PLAYER TWO MOVE
+        fly_to = move_cow("player2", "player1", possible_moves) if player2_dead_cows < 9 else fly_cow("player2", "player1", possible_moves)
+        player2_move_count += 1
+        # test for a mill
+        if check_for_mill(fly_to, "player2", "player1", mill_list, possible_moves):
+            try:
+                draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
+            except:
+                print("error drawing board")
+                
+            print("player two has a mill")
+            shoot_cow("player2", "player1", possible_moves)
+            player2_dead_cows += 1
+            player2_cows_in_play -= 1
+            player2_move_count -= 1
+        # END OF PLAYER TWO MOVE
     # END OF FLYING PHASE
-
+    
+    if player1_dead_cows == 10:
+        print("player two only has two cows remaining")
+        print("player one is the winner. ukuhalalisela!")
+    elif player2_dead_cows == 10:
+        print("player one only has two cows remaining")
+        print("player two is the winner. ukuhalalisela!")
+    elif player1_move_count == 10:
+        print("player one hasn't shot a cow in ten moves")
+        print("it's a draw")
+    elif player2_move_count == 10:
+        print("player two hasn't shot a cow in ten moves")
+        print("it's a draw")
+        
+    print("thank-you for playing, hamba kahle")
     # end of program

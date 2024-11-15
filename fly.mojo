@@ -46,7 +46,7 @@ def fly_cow(player: String, opponent: String, inout possible_moves: Dict[String,
                 except:
                     print("error drawing board")
                     
-                print(String("{} has flown their cow from {} to {}").format(name, move_from, move_to))
+                print(String("{} has flown their cow from {} to {}").format(name, fly_from, fly_to))
                 break  
             else:
                 print("please use structure: 'current position' to 'new position', eg. f2 to g1")
