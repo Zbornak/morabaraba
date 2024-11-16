@@ -69,6 +69,14 @@ def move_cow(player: String, opponent: String, inout possible_moves: Dict[String
         # check if player input is valid
         if move_from in possible_moves and move_to in possible_moves:
             if possible_moves[move_from].ownership == player and possible_moves[move_to].ownership == "unowned" and check_move(move_from, move_to):
+                # take other cows out of mill using mill list
+                for mill in mill_list:
+                    if move_from in mill[]:
+                        if possible_moves[mill[][0]].ownership == player and possible_moves[mill[][1]].ownership == player and possible_moves[mill[][2]].ownership == player:
+                            possible_moves[mill[][0]].in_mill = False
+                            possible_moves[mill[][1]].in_mill = False
+                            possible_moves[mill[][2]].in_mill = False
+                            
                 possible_moves[move_from].ownership = "unowned"
                 possible_moves[move_from].name = move_from
                 # change board piece to no longer in play
@@ -79,18 +87,6 @@ def move_cow(player: String, opponent: String, inout possible_moves: Dict[String
                 possible_moves[move_to].name = "⑁⚇" if player == "player1" else "⑁⚉"
                 # change board piece to in play
                 possible_moves[move_to].in_play = True
-                
-                # take other cows out of mill using mill list
-                for mill in mill_list:
-                    if move_from in mill[]:
-                        if possible_moves[mill[][0]].ownership == player and possible_moves[mill[][1]].ownership == player and possible_moves[mill[][2]].ownership == player:
-                            possible_moves[mill[][0]].in_mill = False
-                            possible_moves[mill[][1]].in_mill = False
-                            possible_moves[mill[][2]].in_mill = False
-                        elif possible_moves[mill[][0]].ownership == opponent and possible_moves[mill[][1]].ownership == opponent and possible_moves[mill[][2]].ownership == opponent:
-                            possible_moves[mill[][0]].in_mill = True
-                            possible_moves[mill[][1]].in_mill = True
-                            possible_moves[mill[][2]].in_mill = True
                 
                 try:
                     draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
