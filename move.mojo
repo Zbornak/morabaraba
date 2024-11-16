@@ -39,13 +39,9 @@ def allowed_adjacent_moves(move_from: String) -> List[String]:
     else:
         return List[String]()
     
-def check_move(move_from: String, move_to: String, inout possible_moves: Dict[String, Board_Piece]) -> Bool:
+def check_move(move_from: String, move_to: String) -> Bool:
     var allowed_moves = allowed_adjacent_moves(move_from)
     if move_to in allowed_moves:
-        # causing crash
-        for move in allowed_moves:
-            possible_moves[str(move)].in_mill = False
-        ###
         return True
     return False
     
@@ -72,7 +68,7 @@ def move_cow(player: String, opponent: String, inout possible_moves: Dict[String
         
         # check if player input is valid
         if move_from in possible_moves and move_to in possible_moves:
-            if possible_moves[move_from].ownership == player and possible_moves[move_to].ownership == "unowned" and check_move(move_from, move_to, possible_moves):
+            if possible_moves[move_from].ownership == player and possible_moves[move_to].ownership == "unowned" and check_move(move_from, move_to):
                 possible_moves[move_from].ownership = "unowned"
                 possible_moves[move_from].name = move_from
                 # change board piece to no longer in play
