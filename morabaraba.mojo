@@ -95,7 +95,7 @@ def main():
     print("player one controls the dark cows (⑁⚇), player two has the light cows (⑁⚉)")
     print("player one goes first")
                      
-    while player1_cows_remaining > 4 and player2_cows_remaining > 4: # 4 for testing, 0 in production
+    while player1_cows_remaining > 6 and player2_cows_remaining > 6: # 6 for testing, 0 in production
         # START OF PLAYER 1 MOVE      
         py_player1_move_choice = py_input("player one make your move: ")
         player1_move_choice = str(py_player1_move_choice)
@@ -222,7 +222,7 @@ def main():
     while player1_dead_cows < 9 or player2_dead_cows < 9:
         var move_to: String = ""
         # PLAYER ONE MOVE
-        move_to = move_cow("player1", "player2", possible_moves)
+        move_to = move_cow("player1", "player2", possible_moves, mill_list)
         # test for a mill
         if check_for_mill(move_to, "player1", "player2", mill_list, possible_moves):
             try:
@@ -237,7 +237,7 @@ def main():
         # END OF PLAYER ONE MOVE
         
         # PLAYER TWO MOVE
-        move_to = move_cow("player2", "player1", possible_moves)
+        move_to = move_cow("player2", "player1", possible_moves, mill_list)
         # test for a mill
         if check_for_mill(move_to, "player2", "player1", mill_list, possible_moves):
             try:
@@ -268,7 +268,7 @@ def main():
         
     while player1_dead_cows < 10 or player2_dead_cows < 10:
         # PLAYER ONE MOVE
-        fly_to = move_cow("player1", "player2", possible_moves) if player1_dead_cows < 9 else fly_cow("player1", "player2", possible_moves)
+        fly_to = move_cow("player1", "player2", possible_moves, mill_list) if player1_dead_cows < 9 else fly_cow("player1", "player2", possible_moves)
         player1_move_count += 1
         # test for a mill
         if check_for_mill(fly_to, "player1", "player2", mill_list, possible_moves):
@@ -289,7 +289,7 @@ def main():
             print("both players' cows can now fly")
         
         # PLAYER TWO MOVE
-        fly_to = move_cow("player2", "player1", possible_moves) if player2_dead_cows < 9 else fly_cow("player2", "player1", possible_moves)
+        fly_to = move_cow("player2", "player1", possible_moves, mill_list) if player2_dead_cows < 9 else fly_cow("player2", "player1", possible_moves)
         player2_move_count += 1
         # test for a mill
         if check_for_mill(fly_to, "player2", "player1", mill_list, possible_moves):
