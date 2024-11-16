@@ -268,7 +268,7 @@ def main():
         
     while player1_dead_cows < 10 or player2_dead_cows < 10:
         # PLAYER ONE MOVE
-        fly_to = move_cow("player1", "player2", possible_moves, mill_list) if player1_dead_cows < 9 else fly_cow("player1", "player2", possible_moves)
+        fly_to = move_cow("player1", "player2", possible_moves, mill_list) if player1_dead_cows < 9 else fly_cow("player1", "player2", possible_moves, mill_list)
         player1_move_count += 1
         # test for a mill
         if check_for_mill(fly_to, "player1", "player2", mill_list, possible_moves):
@@ -289,7 +289,7 @@ def main():
             print("both players' cows can now fly")
         
         # PLAYER TWO MOVE
-        fly_to = move_cow("player2", "player1", possible_moves, mill_list) if player2_dead_cows < 9 else fly_cow("player2", "player1", possible_moves)
+        fly_to = move_cow("player2", "player1", possible_moves, mill_list) if player2_dead_cows < 9 else fly_cow("player2", "player1", possible_moves, mill_list)
         player2_move_count += 1
         # test for a mill
         if check_for_mill(fly_to, "player2", "player1", mill_list, possible_moves):
