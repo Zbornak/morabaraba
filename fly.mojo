@@ -32,7 +32,7 @@ def fly_cow(player: String, opponent: String, inout possible_moves: Dict[String,
             if possible_moves[fly_from].ownership == player and possible_moves[fly_to].ownership == "unowned":
                 # take other cows out of mill using mill list
                 for mill in mill_list:
-                    if move_from in mill[]:
+                    if fly_from in mill[]:
                         if possible_moves[mill[][0]].ownership == player and possible_moves[mill[][1]].ownership == player and possible_moves[mill[][2]].ownership == player:
                             possible_moves[mill[][0]].in_mill = False
                             possible_moves[mill[][1]].in_mill = False
