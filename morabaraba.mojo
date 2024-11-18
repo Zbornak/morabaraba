@@ -291,6 +291,9 @@ def main():
             player2_dead_cows += 1
             player2_cows_in_play -= 1
             player1_move_count -= 1
+            
+        print(String("player one has {} cows remaining").format(player1_cows_remaining))
+        print(String("player one has {} dead cow/s").format(player1_dead_cows))
         # END OF PLAYER ONE MOVE
         
         # check to see who can fly
@@ -312,6 +315,9 @@ def main():
             player2_dead_cows += 1
             player2_cows_in_play -= 1
             player2_move_count -= 1
+            
+        print(String("player two has {} cows remaining").format(player1_cows_remaining))
+        print(String("player two has {} dead cow/s").format(player1_dead_cows))
         # END OF PLAYER TWO MOVE
         
         # check to see who can fly
