@@ -24,6 +24,14 @@ def fly_cow(player: String, opponent: String, inout possible_moves: Dict[String,
         if len(words) == 3 and words[1] == "to":
             fly_from = words[0]
             fly_to = words[2]
+        elif words[0] == "exit":
+            exit()
+        elif words[0] == "rules":
+            print_rules()
+            try:
+                draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
+            except:
+                print("error drawing board")
         else:
             print("invalid")
         
@@ -60,14 +68,7 @@ def fly_cow(player: String, opponent: String, inout possible_moves: Dict[String,
                 break  
             else:
                 print("please use structure: 'current position' to 'new position', eg. f2 to g1")
-        elif fly_choice == "rules":
-            print_rules()
-            try:
-                draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
-            except:
-                print("error drawing board")
-        elif fly_choice == "exit":
-            exit()
+
         else:
             print("please use structure: 'current position' to 'new position', eg. f2 to g1")
 
