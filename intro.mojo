@@ -11,5 +11,5 @@ fn print_intro():
     A traditional 2-player strategy game from South Africa
     
     Type 'rules' during your turn to get the rules of the game or 'exit' to leave
-    -------------------------------------------------------------------------""")
+    -----------------------------------------------------------------------------""")
      
