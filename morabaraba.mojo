@@ -95,7 +95,7 @@ def main():
     print("player one controls the dark cows (⑁⚇), player two has the light cows (⑁⚉)")
     print("player one goes first")
                      
-    while player1_cows_remaining > 0 and player2_cows_remaining > 0: # 6 for testing, 0 in production
+    while player1_cows_remaining > 6 and player2_cows_remaining > 6: # 6 for testing, 0 in production
         # START OF PLAYER 1 MOVE      
         py_player1_move_choice = py_input("player one make your move: ")
         player1_move_choice = str(py_player1_move_choice)
@@ -237,6 +237,9 @@ def main():
             shoot_cow("player1", "player2", possible_moves)
             player2_dead_cows += 1
             player2_cows_in_play -= 1
+            
+        print(String("player one has {} cows remaining").format(player1_cows_remaining))
+        print(String("player one has {} dead cow/s").format(player1_dead_cows))
         # END OF PLAYER ONE MOVE
         
         # PLAYER TWO MOVE
@@ -252,6 +255,9 @@ def main():
             shoot_cow("player2", "player1", possible_moves)
             player2_dead_cows += 1
             player2_cows_in_play -= 1
+            
+        print(String("player two has {} cows remaining").format(player1_cows_remaining))
+        print(String("player two has {} dead cow/s").format(player1_dead_cows))
         # END OF PLAYER TWO MOVE
     # END OF MOVING PHASE
     
