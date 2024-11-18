@@ -28,7 +28,7 @@ def main():
     
     var player2_cows_remaining = 12
     var player2_cows_in_play = 0
-    var player2_dead_cows = 0
+    var player2_dead_cows = 0 
     
     # All possible mills(20)
     var mill_12 = List(String("d5"), String("d6"), String("d7"))
@@ -95,7 +95,7 @@ def main():
     print("player one controls the dark cows (⑁⚇), player two has the light cows (⑁⚉)")
     print("player one goes first")
                      
-    while player1_cows_remaining > 6 and player2_cows_remaining > 6: # 6 for testing, 0 in production
+    while player1_cows_remaining > 0 and player2_cows_remaining > 0: # 6 for testing, 0 in production
         # START OF PLAYER 1 MOVE      
         py_player1_move_choice = py_input("player one make your move: ")
         player1_move_choice = str(py_player1_move_choice)
