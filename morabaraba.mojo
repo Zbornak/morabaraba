@@ -80,6 +80,37 @@ def main():
     possible_moves["d1"] = Board_Piece("d1", "unowned", False, False)
     possible_moves["g1"] = Board_Piece("g1", "unowned", False, False)
     
+    # all allowed adjacent moves
+    var allowed_moves = Dict[String, List[String]]()
+    allowed_moves["a7"] = List[String]("d7", "b6", "a4")
+    allowed_moves["a4"] = List[String]("a7", "b4", "a1")
+    allowed_moves["a1"] = List[String]("a4", "b2", "d1")
+    allowed_moves["b6"] = List[String]("a7", "d6", "c5", "b4")
+    allowed_moves["b4"] = List[String]("a4", "b6", "b2", "c4")
+    allowed_moves["b2"] = List[String]("a1", "b4", "d2", "c3")
+    allowed_moves["c5"] = List[String]("b6", "d5", "c4")
+    allowed_moves["c4"] = List[String]("b4", "c5", "c3")
+    allowed_moves["c3"] = List[String]("b2", "c4", "d3")
+    allowed_moves["d7"] = List[String]("a7", "d6", "g7")
+    allowed_moves["d6"] = List[String]("d7", "b6", "d5", "f6")
+    allowed_moves["d5"] = List[String]("d6", "c5", "e5")
+    allowed_moves["d3"] = List[String]("c3", "e3", "d2")
+    allowed_moves["d2"] = List[String]("d3", "b2", "f2", "d1")
+    allowed_moves["d1"] = List[String]("a1", "d2", "g1")
+    allowed_moves["e5"] = List[String]("d5", "f6", "e4")
+    allowed_moves["e4"] = List[String]("e5", "f4", "e3")
+    allowed_moves["e3"] = List[String]("e4", "d3", "f2")
+    allowed_moves["f6"] = List[String]("g7", "d6", "e5", "f4")
+    allowed_moves["f4"] = List[String]("f6", "e4", "f2", "g4")
+    allowed_moves["f2"] = List[String]("e3", "f4", "g1", "d2")
+    allowed_moves["g7"] = List[String]("d7", "f6", "g4")
+    allowed_moves["g4"] = List[String]("g7", "f4", "g1")
+    allowed_moves["g1"] = List[String]("d1", "f2", "g4")
+    
+    # function to check if player can make any moves using allowed_moves dictionary
+    def player_can_move() -> Bool:
+        return True
+    
     print_intro()
     
     Python.add_to_path(".")
@@ -96,122 +127,132 @@ def main():
     print("player one goes first")
                      
     while player1_cows_remaining > 0 and player2_cows_remaining > 0: # 6 for testing, 0 in production
-        # START OF PLAYER 1 MOVE      
-        py_player1_move_choice = py_input("player one make your move: ")
-        player1_move_choice = str(py_player1_move_choice)
-        
-        # check to see if choice is valid and if you or player 2 aren't already on that spot
-        if player1_move_choice in possible_moves and possible_moves[player1_move_choice].ownership == "unowned":
-            # change board position into a dark cow
-            possible_moves[player1_move_choice].name = "⑁⚇"
+        # START OF PLAYER 1 MOVE  
+        if player_can_move():    
+            py_player1_move_choice = py_input("player one make your move: ")
+            player1_move_choice = str(py_player1_move_choice)
             
-            # change board status from unowned to player 1
-            possible_moves[player1_move_choice].ownership = "player1"
-            
-            # change board piece to in play
-            possible_moves[player1_move_choice].in_play = True
-            
-            try:
-                draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
-            except:
-                print("error drawing board")
-                
-            player1_cows_remaining -= 1
-            player1_cows_in_play += 1
-            
-        elif player1_move_choice == "rules":
-            print_rules()
-            
-            try:
-                draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
-            except:
-                print("error drawing board")
-                
-            continue
-            
-        elif player1_move_choice == "exit":
-            return 1
-        
-        else:
-            print("invalid move, please try again") 
-            continue
-                   
-        print(String("player one chose {}").format(player1_move_choice))
-        # print(String("{0} is now marked as owned by {1}").format(player1_move_choice, possible_moves[player1_move_choice].ownership))
-        print(String("player one has {} cows remaining").format(player1_cows_remaining))
-        print(String("player one has {} dead cow/s").format(player1_dead_cows))
-        
-        # test for a mill
-        if check_for_mill(player1_move_choice, "player1", "player2", mill_list, possible_moves):
-            try:
-                draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
-            except:
-                print("error drawing board")
-                
-            print("player one has a mill")
-            shoot_cow("player1", "player2", possible_moves)
-            player2_dead_cows += 1
-            player2_cows_in_play -= 1
-        # END OF PLAYER 1 MOVE
-                
-        # START OF PLAYER 2 MOVE      
-        py_player2_move_choice = py_input("player two make your move: ")
-        player2_move_choice = str(py_player2_move_choice)
-        
-        while True:
-            # check to see if choice is valid and if you or player 1 aren't already on that spot
-            if player2_move_choice in possible_moves and possible_moves[player2_move_choice].ownership == "unowned":
+            # check to see if choice is valid and if you or player 2 aren't already on that spot
+            if player1_move_choice in possible_moves and possible_moves[player1_move_choice].ownership == "unowned":
                 # change board position into a dark cow
-                possible_moves[player2_move_choice].name = "⑁⚉"
+                possible_moves[player1_move_choice].name = "⑁⚇"
                 
-                # change board status from unowned to player 2
-                possible_moves[player2_move_choice].ownership = "player2"
+                # change board status from unowned to player 1
+                possible_moves[player1_move_choice].ownership = "player1"
                 
                 # change board piece to in play
-                possible_moves[player2_move_choice].in_play = True
+                possible_moves[player1_move_choice].in_play = True
                 
                 try:
                     draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
                 except:
                     print("error drawing board")
                     
-                player2_cows_remaining -= 1
-                player2_cows_in_play += 1
+                player1_cows_remaining -= 1
+                player1_cows_in_play += 1
                 
-                break
-                
-            elif player2_move_choice == "rules":
+            elif player1_move_choice == "rules":
                 print_rules()
                 
                 try:
                     draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
                 except:
                     print("error drawing board")
+                    
+                continue
                 
-            elif player2_move_choice == "exit":
+            elif player1_move_choice == "exit":
                 return 1
             
             else:
                 print("invalid move, please try again") 
+                continue
+                       
+            print(String("player one chose {}").format(player1_move_choice))
+            # print(String("{0} is now marked as owned by {1}").format(player1_move_choice, possible_moves[player1_move_choice].ownership))
+            print(String("player one has {} cows remaining").format(player1_cows_remaining))
+            print(String("player one has {} dead cow/s").format(player1_dead_cows))
+            
+            # test for a mill
+            if check_for_mill(player1_move_choice, "player1", "player2", mill_list, possible_moves):
+                try:
+                    draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
+                except:
+                    print("error drawing board")
+                    
+                print("player one has a mill")
+                shoot_cow("player1", "player2", possible_moves)
+                player2_dead_cows += 1
+                player2_cows_in_play -= 1
+        else:
+            print("player one cannot make a move")
+            print("player two is the winner. ukuhalalisela!")
+            return 1
+        # END OF PLAYER 1 MOVE
                 
+        # START OF PLAYER 2 MOVE  
+        if player_can_move():    
             py_player2_move_choice = py_input("player two make your move: ")
             player2_move_choice = str(py_player2_move_choice)
-                   
-        print(String("player two chose {}").format(player2_move_choice))
-        print(String("player two has {} cows remaining").format(player2_cows_remaining))
-        print(String("player two has {} dead cow/s").format(player2_dead_cows))
-        
-        # test for a mill
-        if check_for_mill(player2_move_choice, "player2", "player1", mill_list, possible_moves):
-            try:
-                draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
-            except:
-                print("error drawing board")
+            
+            while True:
+                # check to see if choice is valid and if you or player 1 aren't already on that spot
+                if player2_move_choice in possible_moves and possible_moves[player2_move_choice].ownership == "unowned":
+                    # change board position into a dark cow
+                    possible_moves[player2_move_choice].name = "⑁⚉"
+                    
+                    # change board status from unowned to player 2
+                    possible_moves[player2_move_choice].ownership = "player2"
+                    
+                    # change board piece to in play
+                    possible_moves[player2_move_choice].in_play = True
+                    
+                    try:
+                        draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
+                    except:
+                        print("error drawing board")
+                        
+                    player2_cows_remaining -= 1
+                    player2_cows_in_play += 1
+                    
+                    break
+                    
+                elif player2_move_choice == "rules":
+                    print_rules()
+                    
+                    try:
+                        draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
+                    except:
+                        print("error drawing board")
+                    
+                elif player2_move_choice == "exit":
+                    return 1
                 
-            print("player two has a mill")
-            shoot_cow("player2", "player1", possible_moves)
-            player1_dead_cows += 1
-            player1_cows_in_play -= 1
+                else:
+                    print("invalid move, please try again") 
+                    
+                py_player2_move_choice = py_input("player two make your move: ")
+                player2_move_choice = str(py_player2_move_choice)
+                       
+            print(String("player two chose {}").format(player2_move_choice))
+            print(String("player two has {} cows remaining").format(player2_cows_remaining))
+            print(String("player two has {} dead cow/s").format(player2_dead_cows))
+            
+            # test for a mill
+            if check_for_mill(player2_move_choice, "player2", "player1", mill_list, possible_moves):
+                try:
+                    draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
+                except:
+                    print("error drawing board")
+                    
+                print("player two has a mill")
+                shoot_cow("player2", "player1", possible_moves)
+                player1_dead_cows += 1
+                player1_cows_in_play -= 1
+        else:
+            print("player two cannot make a move")
+            print("player one is the winner. ukuhalalisela!")
+            return 1
         # END OF PLAYER 2 MOVE
     
     print("all living cows are now in play")
