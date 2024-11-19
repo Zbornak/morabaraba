@@ -292,7 +292,6 @@ def main():
                 player2_dead_cows += 1
                 player2_cows_in_play -= 1
                 
-            print(String("player one has {} cows remaining").format(player1_cows_remaining))
             print(String("player one has {} dead cow/s").format(player1_dead_cows))
         else:
             print("player one cannot make a move")
@@ -313,10 +312,9 @@ def main():
                     
                 print("player two has a mill")
                 shoot_cow("player2", "player1", possible_moves)
-                player2_dead_cows += 1
-                player2_cows_in_play -= 1
+                player1_dead_cows += 1
+                player1_cows_in_play -= 1
                 
-            print(String("player two has {} cows remaining").format(player1_cows_remaining))
             print(String("player two has {} dead cow/s").format(player1_dead_cows))
         else:
             print("player two cannot make a move")
@@ -377,8 +375,8 @@ def main():
                 
             print("player two has a mill")
             shoot_cow("player2", "player1", possible_moves)
-            player2_dead_cows += 1
-            player2_cows_in_play -= 1
+            player1_dead_cows += 1
+            player1_cows_in_play -= 1
             player2_move_count -= 1
             
         print(String("player two has {} cows remaining").format(player1_cows_remaining))
