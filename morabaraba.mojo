@@ -108,7 +108,21 @@ def main():
     allowed_moves["g1"] = List[String]("d1", "f2", "g4")
     
     # function to check if player can make any moves using allowed_moves dictionary
-    def player_can_move() -> Bool:
+    def player_can_move(moves_list: Dict[String, List[String]], player: String, inout possible_moves: Dict[String, Board_Piece]) -> Bool:
+        if player1_cows_in_play == 0 and player2_cows_in_play == 0:
+            for position in moves_list.keys():
+                if possible_moves[position[]].ownership == "unowned":
+                    return True
+        else:            
+            for position in moves_list.items():
+                if possible_moves[position[].key].ownership == player:
+                    for adjacent_move in position[].value:
+                        if possible_moves[adjacent_move[]].ownership == "unowned":
+                            return True
+        return False
+    
+    # function to check if player can make any moves during flying phase
+    def player_can_fly(player: String, inout possible_moves: Dict[String, Board_Piece]) -> Bool:
         return True
     
     print_intro()
@@ -121,14 +135,14 @@ def main():
     except:
         print("error drawing board") 
     
-    print("sawubona, izilokotho ezinhle!")
+    print("sawubona, izilokotho ezinhle")
     print("***PLACING PHASE***")
     print("player one controls the dark cows (⑁⚇), player two has the light cows (⑁⚉)")
     print("player one goes first")
                      
     while player1_cows_remaining > 0 and player2_cows_remaining > 0: # 6 for testing, 0 in production
         # START OF PLAYER 1 MOVE  
-        if player_can_move():    
+        if player_can_move(allowed_moves, "player1", possible_moves):    
             py_player1_move_choice = py_input("player one make your move: ")
             player1_move_choice = str(py_player1_move_choice)
             
@@ -187,11 +201,12 @@ def main():
         else:
             print("player one cannot make a move")
             print("player two is the winner. ukuhalalisela!")
+            print("thank-you for playing, hamba kahle")
             return 1
         # END OF PLAYER 1 MOVE
                 
         # START OF PLAYER 2 MOVE  
-        if player_can_move():    
+        if player_can_move(allowed_moves, "player2", possible_moves):    
             py_player2_move_choice = py_input("player two make your move: ")
             player2_move_choice = str(py_player2_move_choice)
             
@@ -252,6 +267,7 @@ def main():
         else:
             print("player two cannot make a move")
             print("player one is the winner. ukuhalalisela!")
+            print("thank-you for playing, hamba kahle")
             return 1
         # END OF PLAYER 2 MOVE
     
@@ -266,39 +282,51 @@ def main():
     while player1_dead_cows < 9 or player2_dead_cows < 9:
         var move_to: String = ""
         # PLAYER ONE MOVE
-        move_to = move_cow("player1", "player2", possible_moves, mill_list)
-        # test for a mill
-        if check_for_mill(move_to, "player1", "player2", mill_list, possible_moves):
-            try:
-                draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
-            except:
-                print("error drawing board")
+        if player_can_move(allowed_moves, "player1", possible_moves): 
+            move_to = move_cow("player1", "player2", possible_moves, mill_list)
+            # test for a mill
+            if check_for_mill(move_to, "player1", "player2", mill_list, possible_moves):
+                try:
+                    draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
+                except:
+                    print("error drawing board")
+                    
+                print("player one has a mill")
+                shoot_cow("player1", "player2", possible_moves)
+                player2_dead_cows += 1
+                player2_cows_in_play -= 1
                 
-            print("player one has a mill")
-            shoot_cow("player1", "player2", possible_moves)
-            player2_dead_cows += 1
-            player2_cows_in_play -= 1
-            
-        print(String("player one has {} cows remaining").format(player1_cows_remaining))
-        print(String("player one has {} dead cow/s").format(player1_dead_cows))
+            print(String("player one has {} cows remaining").format(player1_cows_remaining))
+            print(String("player one has {} dead cow/s").format(player1_dead_cows))
+        else:
+            print("player one cannot make a move")
+            print("player two is the winner. ukuhalalisela!")
+            print("thank-you for playing, hamba kahle")
+            return 1
         # END OF PLAYER ONE MOVE
         
         # PLAYER TWO MOVE
-        move_to = move_cow("player2", "player1", possible_moves, mill_list)
-        # test for a mill
-        if check_for_mill(move_to, "player2", "player1", mill_list, possible_moves):
-            try:
-                draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
-            except:
-                print("error drawing board")
+        if player_can_move(allowed_moves, "player2", possible_moves):
+            move_to = move_cow("player2", "player1", possible_moves, mill_list)
+            # test for a mill
+            if check_for_mill(move_to, "player2", "player1", mill_list, possible_moves):
+                try:
+                    draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
+                except:
+                    print("error drawing board")
+                    
+                print("player two has a mill")
+                shoot_cow("player2", "player1", possible_moves)
+                player2_dead_cows += 1
+                player2_cows_in_play -= 1
                 
-            print("player two has a mill")
-            shoot_cow("player2", "player1", possible_moves)
-            player2_dead_cows += 1
-            player2_cows_in_play -= 1
-            
-        print(String("player two has {} cows remaining").format(player1_cows_remaining))
-        print(String("player two has {} dead cow/s").format(player1_dead_cows))
+            print(String("player two has {} cows remaining").format(player1_cows_remaining))
+            print(String("player two has {} dead cow/s").format(player1_dead_cows))
+        else:
+            print("player two cannot make a move")
+            print("player one is the winner. ukuhalalisela!")
+            print("thank-you for playing, hamba kahle")
+            return 1
         # END OF PLAYER TWO MOVE
     # END OF MOVING PHASE
     
@@ -318,23 +346,29 @@ def main():
         
     while player1_dead_cows < 10 or player2_dead_cows < 10:
         # PLAYER ONE MOVE
-        fly_to = move_cow("player1", "player2", possible_moves, mill_list) if player1_dead_cows < 9 else fly_cow("player1", "player2", possible_moves, mill_list)
-        player1_move_count += 1
-        # test for a mill
-        if check_for_mill(fly_to, "player1", "player2", mill_list, possible_moves):
-            try:
-                draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
-            except:
-                print("error drawing board")
+        if player_can_fly("player1", possible_moves):
+            fly_to = move_cow("player1", "player2", possible_moves, mill_list) if player1_dead_cows < 9 else fly_cow("player1", "player2", possible_moves, mill_list)
+            player1_move_count += 1
+            # test for a mill
+            if check_for_mill(fly_to, "player1", "player2", mill_list, possible_moves):
+                try:
+                    draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
+                except:
+                    print("error drawing board")
+                    
+                print("player one has a mill")
+                shoot_cow("player1", "player2", possible_moves)
+                player2_dead_cows += 1
+                player2_cows_in_play -= 1
+                player1_move_count -= 1
                 
-            print("player one has a mill")
-            shoot_cow("player1", "player2", possible_moves)
-            player2_dead_cows += 1
-            player2_cows_in_play -= 1
-            player1_move_count -= 1
-            
-        print(String("player one has {} cows remaining").format(player1_cows_remaining))
-        print(String("player one has {} dead cow/s").format(player1_dead_cows))
+            print(String("player one has {} cows remaining").format(player1_cows_remaining))
+            print(String("player one has {} dead cow/s").format(player1_dead_cows))
+        else:
+            print("player one cannot make a move")
+            print("player two is the winner. ukuhalalisela!")
+            print("thank-you for playing, hamba kahle")
+            return 1
         # END OF PLAYER ONE MOVE
         
         # check to see who can fly
@@ -342,23 +376,29 @@ def main():
             print("both players' cows can now fly")
         
         # PLAYER TWO MOVE
-        fly_to = move_cow("player2", "player1", possible_moves, mill_list) if player2_dead_cows < 9 else fly_cow("player2", "player1", possible_moves, mill_list)
-        player2_move_count += 1
-        # test for a mill
-        if check_for_mill(fly_to, "player2", "player1", mill_list, possible_moves):
-            try:
-                draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
-            except:
-                print("error drawing board")
+        if player_can_fly("player2", possible_moves):
+            fly_to = move_cow("player2", "player1", possible_moves, mill_list) if player2_dead_cows < 9 else fly_cow("player2", "player1", possible_moves, mill_list)
+            player2_move_count += 1
+            # test for a mill
+            if check_for_mill(fly_to, "player2", "player1", mill_list, possible_moves):
+                try:
+                    draw_board(possible_moves["a1"], possible_moves["a4"], possible_moves["a7"], possible_moves["b2"], possible_moves["b4"], possible_moves["b6"], possible_moves["c3"], possible_moves["c4"], possible_moves["c5"], possible_moves["d1"], possible_moves["d2"], possible_moves["d3"], possible_moves["d5"], possible_moves["d6"], possible_moves["d7"], possible_moves["e3"], possible_moves["e4"], possible_moves["e5"], possible_moves["f2"], possible_moves["f4"], possible_moves["f6"], possible_moves["g1"], possible_moves["g4"], possible_moves["g7"], possible_moves)
+                except:
+                    print("error drawing board")
+                    
+                print("player two has a mill")
+                shoot_cow("player2", "player1", possible_moves)
+                player2_dead_cows += 1
+                player2_cows_in_play -= 1
+                player2_move_count -= 1
                 
-            print("player two has a mill")
-            shoot_cow("player2", "player1", possible_moves)
-            player2_dead_cows += 1
-            player2_cows_in_play -= 1
-            player2_move_count -= 1
-            
-        print(String("player two has {} cows remaining").format(player1_cows_remaining))
-        print(String("player two has {} dead cow/s").format(player1_dead_cows))
+            print(String("player two has {} cows remaining").format(player1_cows_remaining))
+            print(String("player two has {} dead cow/s").format(player1_dead_cows))
+        else:
+            print("player two cannot make a move")
+            print("player one is the winner. ukuhalalisela!")
+            print("thank-you for playing, hamba kahle")
+            return 1
         # END OF PLAYER TWO MOVE
         
         # check to see who can fly
