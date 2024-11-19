@@ -338,7 +338,7 @@ def main():
     elif player2_dead_cows > 9:
         print("player two your cows can now fly to any free space")
         
-    while player1_dead_cows < 10 or player2_dead_cows < 10:
+    while player1_dead_cows < 9 or player2_dead_cows < 9:
         # PLAYER ONE MOVE
         fly_to = move_cow("player1", "player2", possible_moves, mill_list) if player1_dead_cows < 9 else fly_cow("player1", "player2", possible_moves, mill_list)
         player1_move_count += 1
