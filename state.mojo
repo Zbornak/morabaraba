@@ -39,7 +39,7 @@ struct Board:
         for i in range(BOARD_SIZE):
             for j in range(BOARD_SIZE):
                 if self.is_valid_position(i, j):
-                    print(self.grid[i][j], end=" ")
+                    print(String("{:^3}").format(self.grid[i][j]), end="")
                 else:
-                    print(" ", end=" ")
+                    print("   ", end="")
             print()
